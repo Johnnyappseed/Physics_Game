@@ -65,6 +65,14 @@ class Main extends Sprite
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
 		createCircle (400, 100, 50, true);
 		
+		var revoluteJointDef:b2RevoluteJointDef = new  b2RevoluteJointDef();
+		revoluteJointDef.Initialize(box1, _groundBody, box1.GetWorldCenter());
+		
+		revoluteJointDef.maxMotorTorque = 1.0;
+		revoluteJointDef.enableMotor = true;
+		
+		_world.CreateJoint(revoluteJointDef);
+		
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
 		
 	}
@@ -109,6 +117,7 @@ class Main extends Sprite
 		}
 		
 		var circle = new B2CircleShape (radius * PHYSICS_SCALE);
+		////////////////
 		var fixtureDefinition = new B2FixtureDef ();
 		fixtureDefinition.shape = circle;
 		fixtureDefinition.density = 1;
