@@ -29,7 +29,7 @@ class Main extends Sprite
 	private var PhysicsDebug:Sprite;
 	public var World:B2World;
 	
-	//private var topBlock:B2Body;
+	private var topBlock:B2Body;
 	//public var cgx:Float=400;
 	//public var cgy:Float=0;
 	//public var cga:Float = 10;
@@ -50,6 +50,8 @@ class Main extends Sprite
 		PhysicsDebug = new Sprite ();
 		addChild (PhysicsDebug);		
 		
+		var centerJointX:Int = 400;
+		var centerJointY:Int = 240;
 		World = new B2World(new B2Vec2 (0, 10.0), true);
 		
 		var debugDraw = new B2DebugDraw ();
@@ -58,17 +60,17 @@ class Main extends Sprite
 		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_shapeBit+ B2DebugDraw.e_aabbBit );// + B2DebugDraw.e_aabbBit);
 		
 		World.setDebugDraw (debugDraw);
-		createBox (250, 300, 900, 100, false);
-		//topBlock = createBox (405, 0, 100, 100, true);
+		//var centerLog:B2Body=createBox (250, 300, 900, 100, false);
+		topBlock = createBox (405, 0, 300, 75, true);
 		
 		
 		var cir:B2Body=createCircle (100, 150, 50, false);
 		//cir.setType(B2Body.b2_kinematicBody);
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
-		createCircle (400, 100, 50, true);
+		//createCircle (400, 100, 50, true);
 		
-		var revoluteJointDef:B2RevoluteJointDef = new B2RevoluteJointDef();
-		revoluteJointDef.initialize(box1, _groundBody, box1.GetWorldCenter());
+		var revoluteJointDef:B2RevoluteJointDef = new  B2RevoluteJointDef();
+		revoluteJointDef.initialize(cir, topBlock, cir.getWorldCenter());
 		
 		revoluteJointDef.maxMotorTorque = 1.0;
 		revoluteJointDef.enableMotor = true;
