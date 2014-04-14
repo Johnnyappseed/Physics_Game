@@ -12,8 +12,8 @@ import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2DebugDraw;
 import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2World;
-import box2d.dynamics.joints.B2RevoluteJoint;
-import box2d.dynamics.joints.B2RevoluteJointDef;
+import box2D.dynamics.joints.B2RevoluteJoint;
+import box2D.dynamics.joints.B2RevoluteJointDef;
 
 /**
  * ...
