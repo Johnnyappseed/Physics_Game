@@ -23,12 +23,17 @@ import box2D.dynamics.joints.B2RevoluteJointDef;
 
 class Main extends Sprite 
 {
+	//miscellaneous
 	var inited:Bool;
 	public static var game;
 	public static var PHYSICS_SCALE:Float = 1.0 / 30;
 	private var PhysicsDebug:Sprite;
 	public var World:B2World;
 	
+	//sprites
+	var rock:Projectile;
+	
+	//what?
 	private var topBlock:B2Body;
 	//public var cgx:Float=400;
 	//public var cgy:Float=0;
@@ -48,7 +53,9 @@ class Main extends Sprite
 		inited = true;
 		game = this;
 		PhysicsDebug = new Sprite ();
-		addChild (PhysicsDebug);		
+		addChild (PhysicsDebug);
+		
+		rock = new Projectile(400, 240);
 		
 		var centerJointX:Int = 400;
 		var centerJointY:Int = 240;
@@ -59,12 +66,11 @@ class Main extends Sprite
 		debugDraw.setDrawScale (1 / PHYSICS_SCALE);
 		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_shapeBit+ B2DebugDraw.e_aabbBit );// + B2DebugDraw.e_aabbBit);
 		
-		World.setDebugDraw (debugDraw);
+		World.setDebugDraw(debugDraw);
 		//var centerLog:B2Body=createBox (250, 300, 900, 100, false);
 		topBlock = createBox (405, 0, 300, 75, true);
 		
-		
-		var cir:B2Body=createCircle (100, 150, 50, false);
+		var cir:B2Body = createCircle (100, 150, 50, false);
 		//cir.setType(B2Body.b2_kinematicBody);
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
 		//createCircle (400, 100, 50, true);
@@ -77,8 +83,8 @@ class Main extends Sprite
 		
 		World.createJoint(revoluteJointDef);
 		
+		//event listeners
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
-		
 	}
 
 	/* SETUP */
