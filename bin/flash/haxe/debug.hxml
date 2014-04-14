@@ -4,7 +4,6 @@
 -lib box2d
 -cp src
 -D tools=1.2.6
--D fdb
 -D web
 -swf-version 11.2
 -swf bin/flash/bin/PhysicsGame.swf

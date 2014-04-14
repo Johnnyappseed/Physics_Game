@@ -12,6 +12,8 @@ import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2DebugDraw;
 import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2World;
+import box2d.dynamics.joints.B2RevoluteJoint;
+import box2d.dynamics.joints.B2RevoluteJointDef;
 
 /**
  * ...
@@ -65,13 +67,13 @@ class Main extends Sprite
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
 		createCircle (400, 100, 50, true);
 		
-		var revoluteJointDef:b2RevoluteJointDef = new  b2RevoluteJointDef();
-		revoluteJointDef.Initialize(box1, _groundBody, box1.GetWorldCenter());
+		var revoluteJointDef:B2RevoluteJointDef = new B2RevoluteJointDef();
+		revoluteJointDef.initialize(box1, _groundBody, box1.GetWorldCenter());
 		
 		revoluteJointDef.maxMotorTorque = 1.0;
 		revoluteJointDef.enableMotor = true;
 		
-		_world.CreateJoint(revoluteJointDef);
+		World.createJoint(revoluteJointDef);
 		
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
 		
