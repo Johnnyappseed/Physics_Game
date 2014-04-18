@@ -12,7 +12,6 @@ import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2DebugDraw;
 import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2World;
-import box2D.dynamics.joints.B2RevoluteJoint;
 import box2D.dynamics.joints.B2RevoluteJointDef;
 
 /**
@@ -35,9 +34,8 @@ class Main extends Sprite
 	
 	//what?
 	private var topBlock:B2Body;
-	//public var cgx:Float=400;
-	//public var cgy:Float=0;
-	//public var cga:Float = 10;
+	
+	var gameCanvas:Game_Canvas;
 
 	/* ENTRY POINT */
 	
@@ -56,10 +54,10 @@ class Main extends Sprite
 		addChild (PhysicsDebug);
 		
 		rock = new Projectile(400, 240);
-		
-		var centerJointX:Int = 400;
-		var centerJointY:Int = 240;
 		World = new B2World(new B2Vec2 (0, 10.0), true);
+		
+		gameCanvas = new Game_Canvas();
+		this.addChild(gameCanvas);
 		
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
@@ -68,20 +66,12 @@ class Main extends Sprite
 		
 		World.setDebugDraw(debugDraw);
 		//var centerLog:B2Body=createBox (250, 300, 900, 100, false);
-		topBlock = createBox (405, 0, 300, 75, true);
+		//topBlock = createBox (405, 0, 300, 75, true);
 		
 		var cir:B2Body = createCircle (100, 150, 50, false);
 		//cir.setType(B2Body.b2_kinematicBody);
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
 		//createCircle (400, 100, 50, true);
-		
-		var revoluteJointDef:B2RevoluteJointDef = new  B2RevoluteJointDef();
-		revoluteJointDef.initialize(cir, topBlock, cir.getWorldCenter());
-		
-		revoluteJointDef.maxMotorTorque = 1.0;
-		revoluteJointDef.enableMotor = true;
-		
-		World.createJoint(revoluteJointDef);
 		
 		//event listeners
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
@@ -89,7 +79,7 @@ class Main extends Sprite
 
 	/* SETUP */
 
-	private function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):B2Body
+	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):B2Body
 	{
 		
 		var bodyDefinition = new B2BodyDef ();
@@ -115,7 +105,7 @@ class Main extends Sprite
 		
 	}
 	
-	private function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):B2Body 
+	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):B2Body 
 	{
 		var bodyDefinition = new B2BodyDef ();
 		bodyDefinition.position.set (x * PHYSICS_SCALE, y * PHYSICS_SCALE);
@@ -167,6 +157,17 @@ class Main extends Sprite
 		World.clearForces ();
 		World.drawDebugData ();
 		
+	}
+	
+	public function revoluteJointFunction(first:B2Body, second:B2Body)
+	{
+		var revoluteJointDef:B2RevoluteJointDef = new  B2RevoluteJointDef();
+		revoluteJointDef.initialize(first, second, first.getWorldCenter());
+		
+		revoluteJointDef.maxMotorTorque = 1.0;
+		revoluteJointDef.enableMotor = true;
+		
+		return revoluteJointDef;
 	}
 	
 	public function new() 
