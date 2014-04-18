@@ -14,7 +14,7 @@ class Game_Canvas extends Sprite
 	{
 		super();
 		
-		catapult = new Launcher();
+		catapult = new Launcher(400,200);
 		this.addChild(catapult);
 	}
 	

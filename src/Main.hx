@@ -68,7 +68,7 @@ class Main extends Sprite
 		//var centerLog:B2Body=createBox (250, 300, 900, 100, false);
 		//topBlock = createBox (405, 0, 300, 75, true);
 		
-		var cir:B2Body = createCircle (100, 150, 50, false);
+		//var cir:B2Body = createCircle (100, 150, 50, false);
 		//cir.setType(B2Body.b2_kinematicBody);
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
 		//createCircle (400, 100, 50, true);
@@ -79,7 +79,7 @@ class Main extends Sprite
 
 	/* SETUP */
 
-	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):B2Body
+	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
 	{
 		
 		var bodyDefinition = new B2BodyDef ();
@@ -96,7 +96,7 @@ class Main extends Sprite
 		
 		var fixtureDefinition = new B2FixtureDef ();
 		fixtureDefinition.shape = polygon;
-		fixtureDefinition.density = 1;
+		fixtureDefinition.density = 1.0;
 		fixtureDefinition.friction = 1;
 		
 		var body = World.createBody (bodyDefinition);
@@ -159,10 +159,10 @@ class Main extends Sprite
 		
 	}
 	
-	public function revoluteJointFunction(first:B2Body, second:B2Body)
+	public function revoluteJointFunction(first:B2Body, second:B2Body, point:B2Vec2)
 	{
 		var revoluteJointDef:B2RevoluteJointDef = new  B2RevoluteJointDef();
-		revoluteJointDef.initialize(first, second, first.getWorldCenter());
+		revoluteJointDef.initialize(first, second, point);
 		
 		revoluteJointDef.maxMotorTorque = 1.0;
 		revoluteJointDef.enableMotor = true;
