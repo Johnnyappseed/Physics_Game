@@ -37,12 +37,6 @@ class Launcher extends Sprite
 		joint = new B2Vec2((x+50) * Main.PHYSICS_SCALE,y * Main.PHYSICS_SCALE);
 		var jointWieght:B2RevoluteJointDef = Main.game.revoluteJointFunction(log, wieght, joint);
 		Main.game.World.createJoint(jointWieght);
-		//log.setAngle(-45);
-		
-		staticCircle = Main.game.createCircle (x, y, radius, false);
-		log = Main.game.createBox (405.0, 0.0, 300.0, 75.0, true);
-		
-		
 	}
 	
 }
