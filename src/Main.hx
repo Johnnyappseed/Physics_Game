@@ -74,7 +74,7 @@ class Main extends Sprite
 
 	/* SETUP */
 
-	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):B2Body
+	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
 	{
 		//create body definition
 		var bodyDefinition = new B2BodyDef ();
@@ -86,7 +86,7 @@ class Main extends Sprite
 		var polygon = new B2PolygonShape();
 		polygon.setAsBox ((width / 2) * PHYSICS_SCALE, (height / 2) * PHYSICS_SCALE);
 		fixtureDefinition.shape = polygon;
-		fixtureDefinition.density = 1;
+		fixtureDefinition.density = 1.0;
 		fixtureDefinition.friction = 1;
 		
 		//put fixture+body def into a body to return
@@ -168,10 +168,10 @@ class Main extends Sprite
 		gameCanvas.rock.act();
 	}
 	
-	public function revoluteJointFunction(first:B2Body, second:B2Body)
+	public function revoluteJointFunction(first:B2Body, second:B2Body, point:B2Vec2)
 	{
 		var revoluteJointDef:B2RevoluteJointDef = new  B2RevoluteJointDef();
-		revoluteJointDef.initialize(first, second, first.getWorldCenter());
+		revoluteJointDef.initialize(first, second, point);
 		
 		revoluteJointDef.maxMotorTorque = 1.0;
 		revoluteJointDef.enableMotor = true;
