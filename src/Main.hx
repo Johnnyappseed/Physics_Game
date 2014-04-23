@@ -16,6 +16,8 @@ import box2D.dynamics.joints.B2RevoluteJointDef;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import openfl.Assets;
+import flash.events.Event;
+import flash.events.MouseEvent;
 
 /**
  * ...
@@ -31,11 +33,15 @@ class Main extends Sprite
 	public static var PHYSICS_SCALE:Float = 1.0 / 30;
 	private var PhysicsDebug:Sprite;
 	public var World:B2World;
+	var gameStarted:Bool = false;
 	
 	//what?
 	private var topBlock:B2Body;
 	
+	//game canvas, menus, buttons, etc.
 	var gameCanvas:Game_Canvas;
+	var startMenu:Sprite;
+	var playButton:Sprite;
 
 	/* ENTRY POINT */
 	
@@ -54,28 +60,33 @@ class Main extends Sprite
 		addChild (PhysicsDebug);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
 		
-		gameCanvas = new Game_Canvas();
-		this.addChild(gameCanvas);
+		//create+add start menu and buttons
+		startMenu = createMenu("startMenuIcon.png");
+		this.addChild(startMenu);
+		playButton = createButtonAt(300, 300, "playButtonIcon.png", startMenu);
 		
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
 		debugDraw.setDrawScale (1 / PHYSICS_SCALE);
 		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_shapeBit+ B2DebugDraw.e_aabbBit );// + B2DebugDraw.e_aabbBit);
 		
+		//shows fancy physics objects (remove before game is finished)
 		World.setDebugDraw(debugDraw);
-		//var centerLog:B2Body=createBox (250, 300, 900, 100, false);
-		//topBlock = createBox (405, 0, 300, 75, true);
-		
-		//var cir:B2Body = createCircle (100, 150, 50, false);
-		//cir.setType(B2Body.b2_kinematicBody);
-		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
-		//createCircle (400, 100, 50, true);
 		
 		//event listeners
+		playButton.addEventListener(MouseEvent.CLICK, startGame);
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
 	}
 
 	/* SETUP */
+	
+	public function startGame(e) 
+	{
+		this.removeChild(startMenu);
+		gameCanvas = new Game_Canvas();
+		this.addChild(gameCanvas);
+		gameStarted = true;
+	}
 
 	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
 	{
@@ -140,7 +151,7 @@ class Main extends Sprite
 		return button;
 	}
 	
-	private function this_onEnterFrame (event:Event):Void 
+	private function this_onEnterFrame(event:Event)
 	{
 		/*//topBlock.applyForce(new B2Vec2(-10,0),topBlock.getPosition());
 		//apply forces
@@ -168,7 +179,9 @@ class Main extends Sprite
 		World.clearForces ();
 		World.drawDebugData ();
 		
-		gameCanvas.rock.act();
+		if (gameStarted) {
+			gameCanvas.rock.act();
+		}
 	}
 	
 	public function revoluteJointFunction(first:B2Body, second:B2Body, point:B2Vec2)
