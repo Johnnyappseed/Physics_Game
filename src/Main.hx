@@ -89,7 +89,7 @@ class Main extends Sprite
 		var polygon = new B2PolygonShape();
 		polygon.setAsBox ((width / 2) * PHYSICS_SCALE, (height / 2) * PHYSICS_SCALE);
 		fixtureDefinition.shape = polygon;
-		fixtureDefinition.density = 1.0;
+		fixtureDefinition.density = density;
 		fixtureDefinition.friction = 1;
 		
 		//put fixture+body def into a body to return

@@ -32,7 +32,7 @@ class Launcher extends Sprite
 		log = Main.game.createBox (x - 50, y, 300, 30, true, 1.0);
 		var jointLog:B2RevoluteJointDef = Main.game.revoluteJointFunction(staticCircle, log, staticCircle.getWorldCenter());
 		Main.game.World.createJoint(jointLog);
-		wieght = Main.game.createBox(x + 50, y + 50, 50, 50, true, 10.0);
+		wieght = Main.game.createBox(x + 50, y + 50, 50, 50, true, 2.0);
 		var joint:B2Vec2; 
 		joint = new B2Vec2((x+50) * Main.PHYSICS_SCALE,y * Main.PHYSICS_SCALE);
 		var jointWieght:B2RevoluteJointDef = Main.game.revoluteJointFunction(log, wieght, joint);
