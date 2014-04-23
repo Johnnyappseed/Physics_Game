@@ -24,11 +24,11 @@ class Launcher extends Sprite
 	var log:B2Body;
 	var staticCircle:B2Body;
 
-	public function new() 
+	public function new(x:Int, y:Int, radius:Int) 
 	{
 		super();
 		
-		staticCircle = Main.game.createCircle (100, 150, 50, false);
+		staticCircle = Main.game.createCircle (x, y, radius, false);
 		log = Main.game.createBox (405, 0, 300, 75, true);
 		
 		var revoluteJointDef:B2RevoluteJointDef = Main.game.revoluteJointFunction(staticCircle, log);

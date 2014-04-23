@@ -29,9 +29,6 @@ class Main extends Sprite
 	private var PhysicsDebug:Sprite;
 	public var World:B2World;
 	
-	//sprites
-	var rock:Projectile;
-	
 	//what?
 	private var topBlock:B2Body;
 	
@@ -52,8 +49,6 @@ class Main extends Sprite
 		game = this;
 		PhysicsDebug = new Sprite ();
 		addChild (PhysicsDebug);
-		
-		rock = new Projectile(400, 240);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
 		
 		gameCanvas = new Game_Canvas();
@@ -68,7 +63,7 @@ class Main extends Sprite
 		//var centerLog:B2Body=createBox (250, 300, 900, 100, false);
 		//topBlock = createBox (405, 0, 300, 75, true);
 		
-		var cir:B2Body = createCircle (100, 150, 50, false);
+		//var cir:B2Body = createCircle (100, 150, 50, false);
 		//cir.setType(B2Body.b2_kinematicBody);
 		//cir.applyImpulse(new B2Vec2(1000, 0), cir.getPosition());
 		//createCircle (400, 100, 50, true);
@@ -81,52 +76,65 @@ class Main extends Sprite
 
 	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):B2Body
 	{
-		
+		//create body definition
 		var bodyDefinition = new B2BodyDef ();
 		bodyDefinition.position.set (x * PHYSICS_SCALE, y * PHYSICS_SCALE);
+		if (dynamicBody) bodyDefinition.type = B2Body.b2_dynamicBody;
 		
-		if (dynamicBody) {
-			
-			bodyDefinition.type = B2Body.b2_dynamicBody;
-			
-		}
-		
+		//create fixture definition
+		var fixtureDefinition = new B2FixtureDef ();
 		var polygon = new B2PolygonShape();
 		polygon.setAsBox ((width / 2) * PHYSICS_SCALE, (height / 2) * PHYSICS_SCALE);
-		
-		var fixtureDefinition = new B2FixtureDef ();
 		fixtureDefinition.shape = polygon;
 		fixtureDefinition.density = 1;
 		fixtureDefinition.friction = 1;
 		
+		//put fixture+body def into a body to return
 		var body = World.createBody (bodyDefinition);
 		body.createFixture (fixtureDefinition);
 		return body;
-		
 	}
 	
 	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):B2Body 
 	{
+		//create body definition
 		var bodyDefinition = new B2BodyDef ();
 		bodyDefinition.position.set (x * PHYSICS_SCALE, y * PHYSICS_SCALE);
+		if (dynamicBody) bodyDefinition.type = B2Body.b2_dynamicBody;
 		
-		if (dynamicBody) {
-			
-			bodyDefinition.type = B2Body.b2_dynamicBody;
-			
-		}
-		
-		var circle = new B2CircleShape (radius * PHYSICS_SCALE);
-		////////////////
+		//create fixture definition
 		var fixtureDefinition = new B2FixtureDef ();
-		fixtureDefinition.shape = circle;
+		fixtureDefinition.shape = new B2CircleShape (radius * PHYSICS_SCALE);
 		fixtureDefinition.density = 1;
 		fixtureDefinition.friction = 1;
 		
+		//put fixture+body def into a body that can be returned
 		var body = World.createBody (bodyDefinition);
 		body.createFixture (fixtureDefinition);
 		return body;
+	}
+	
+	public function createMenu(imgName:String)
+	{
+		var menuIcon = new Bitmap(Assets.getBitmapData("img/"+imgName));
+		var menu = new Sprite();
+		menu.addChild(menuIcon);
 		
+		return menu;
+	}
+	
+	public function createButtonAt(placeX:Int, placeY:Int, imgName:String, menu:Sprite)
+	{
+		var buttonIcon = new Bitmap(Assets.getBitmapData("img/"+imgName));
+		var button = new Sprite();
+		button.addChild(buttonIcon);
+		
+		menu.addChild(button);
+		
+		button.x = placeX;
+		button.y = placeY;
+		
+		return button;
 	}
 	
 	private function this_onEnterFrame (event:Event):Void 
@@ -157,6 +165,7 @@ class Main extends Sprite
 		World.clearForces ();
 		World.drawDebugData ();
 		
+		gameCanvas.rock.act();
 	}
 	
 	public function revoluteJointFunction(first:B2Body, second:B2Body)
