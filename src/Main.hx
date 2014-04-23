@@ -13,6 +13,9 @@ import box2D.dynamics.B2DebugDraw;
 import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2World;
 import box2D.dynamics.joints.B2RevoluteJointDef;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import openfl.Assets;
 
 /**
  * ...
@@ -74,7 +77,7 @@ class Main extends Sprite
 
 	/* SETUP */
 
-	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
+	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool):B2Body
 	{
 		//create body definition
 		var bodyDefinition = new B2BodyDef ();

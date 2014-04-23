@@ -40,7 +40,7 @@ class Launcher extends Sprite
 		//log.setAngle(-45);
 		
 		staticCircle = Main.game.createCircle (x, y, radius, false);
-		log = Main.game.createBox (405, 0, 300, 75, true);
+		log = Main.game.createBox (405.0, 0.0, 300.0, 75.0, true);
 		
 		
 	}
