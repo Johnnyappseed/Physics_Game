@@ -7,6 +7,6 @@
 -D web
 -swf-version 11.2
 -swf bin/flash/bin/PhysicsGame.swf
--swf-header 800:480:60:000000
+-swf-header 800:480:60:FFCD73
 -cp bin/flash/haxe
 #--remap nme:flash

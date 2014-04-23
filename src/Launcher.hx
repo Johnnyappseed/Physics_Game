@@ -25,7 +25,7 @@ class Launcher extends Sprite
 	var staticCircle:B2Body;
 	var wieght:B2Body;
 
-	public function new(x:Int, y:Int) 
+	public function new(x:Int, y:Int, radius:Int) 
 	{
 		super();
 		staticCircle = Main.game.createCircle (x, y, 20, false);
@@ -39,6 +39,8 @@ class Launcher extends Sprite
 		Main.game.World.createJoint(jointWieght);
 		//log.setAngle(-45);
 		
+		staticCircle = Main.game.createCircle (x, y, radius, false);
+		log = Main.game.createBox (405, 0, 300, 75, true);
 		
 		
 	}
