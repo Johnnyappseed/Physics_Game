@@ -24,7 +24,7 @@ class Game_Canvas extends Sprite
 		rock = new Projectile(100, 240);
 		this.addChild(rock);
 		
-		ground = Main.game.createBox(400, 480, 800, 10, false);
+		ground = Main.game.createBox(400, 480, 800, 10, false,1.0);
 	}
 	
 }
