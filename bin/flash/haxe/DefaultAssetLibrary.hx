@@ -36,50 +36,50 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		className.set ("img/projectileIcon.png", __ASSET__img_projectileicon_png);
-		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/startMenuIcon.png", __ASSET__img_startmenuicon_png);
-		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/playButtonIcon.png", __ASSET__img_playbuttonicon_png);
-		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/grassIcon.png", __ASSET__img_grassicon_png);
 		type.set ("img/grassIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/smallVerticalBlockIcon.png", __ASSET__img_smallverticalblockicon_png);
-		type.set ("img/smallVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/medVerticalBlockIcon.png", __ASSET__img_medverticalblockicon_png);
-		type.set ("img/medVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/largeVerticalBlockIcon.png", __ASSET__img_largeverticalblockicon_png);
-		type.set ("img/largeVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/smallHorizontalBlockIcon.png", __ASSET__img_smallhorizontalblockicon_png);
-		type.set ("img/smallHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/medHorizontalBlockIcon.png", __ASSET__img_medhorizontalblockicon_png);
-		type.set ("img/medHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/largeHorizontalBlockIcon.png", __ASSET__img_largehorizontalblockicon_png);
 		type.set ("img/largeHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/largeVerticalBlockIcon.png", __ASSET__img_largeverticalblockicon_png);
+		type.set ("img/largeVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/medHorizontalBlockIcon.png", __ASSET__img_medhorizontalblockicon_png);
+		type.set ("img/medHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/medVerticalBlockIcon.png", __ASSET__img_medverticalblockicon_png);
+		type.set ("img/medVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/playButtonIcon.png", __ASSET__img_playbuttonicon_png);
+		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/projectileIcon.png", __ASSET__img_projectileicon_png);
+		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/smallHorizontalBlockIcon.png", __ASSET__img_smallhorizontalblockicon_png);
+		type.set ("img/smallHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/smallVerticalBlockIcon.png", __ASSET__img_smallverticalblockicon_png);
+		type.set ("img/smallVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/startMenuIcon.png", __ASSET__img_startmenuicon_png);
+		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#elseif html5
 		
-		path.set ("img/projectileIcon.png", "img/projectileIcon.png");
-		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/startMenuIcon.png", "img/startMenuIcon.png");
-		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/playButtonIcon.png", "img/playButtonIcon.png");
-		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/grassIcon.png", "img/grassIcon.png");
 		type.set ("img/grassIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/smallVerticalBlockIcon.png", "img/smallVerticalBlockIcon.png");
-		type.set ("img/smallVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/medVerticalBlockIcon.png", "img/medVerticalBlockIcon.png");
-		type.set ("img/medVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/largeVerticalBlockIcon.png", "img/largeVerticalBlockIcon.png");
-		type.set ("img/largeVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/smallHorizontalBlockIcon.png", "img/smallHorizontalBlockIcon.png");
-		type.set ("img/smallHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/medHorizontalBlockIcon.png", "img/medHorizontalBlockIcon.png");
-		type.set ("img/medHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/largeHorizontalBlockIcon.png", "img/largeHorizontalBlockIcon.png");
 		type.set ("img/largeHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/largeVerticalBlockIcon.png", "img/largeVerticalBlockIcon.png");
+		type.set ("img/largeVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/medHorizontalBlockIcon.png", "img/medHorizontalBlockIcon.png");
+		type.set ("img/medHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/medVerticalBlockIcon.png", "img/medVerticalBlockIcon.png");
+		type.set ("img/medVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/playButtonIcon.png", "img/playButtonIcon.png");
+		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/projectileIcon.png", "img/projectileIcon.png");
+		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/smallHorizontalBlockIcon.png", "img/smallHorizontalBlockIcon.png");
+		type.set ("img/smallHorizontalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/smallVerticalBlockIcon.png", "img/smallVerticalBlockIcon.png");
+		type.set ("img/smallVerticalBlockIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/startMenuIcon.png", "img/startMenuIcon.png");
+		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#else
@@ -523,16 +523,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if pixi
 #elseif flash
 
-class __ASSET__img_projectileicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_startmenuicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_grassicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_smallverticalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_medverticalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_largeverticalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_smallhorizontalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_medhorizontalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_largehorizontalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_largeverticalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_medhorizontalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_medverticalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_projectileicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_smallhorizontalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_smallverticalblockicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_startmenuicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 
 
 #elseif html5
