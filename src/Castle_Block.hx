@@ -15,13 +15,13 @@ class Castle_Block extends Sprite
 		
 		//create dynamic block
 		if (isVertical) {
-			w = 10;
+			w = 30;
 			if (size == 1) h = 2 * w;
 			else if (size == 2) h = 3 * w;
 			else h = 4 * w;
 		}
 		else {
-			h = 10;
+			h = 30;
 			if (size == 1) w = 2 * h;
 			else if (size == 2) w = 3 * h;
 			else w = 4 * h;
