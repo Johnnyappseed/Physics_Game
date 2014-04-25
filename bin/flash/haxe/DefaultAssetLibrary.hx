@@ -36,22 +36,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		className.set ("img/playButtonIcon.png", __ASSET__img_playbuttonicon_png);
+		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/projectileIcon.png", __ASSET__img_projectileicon_png);
 		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/startMenuIcon.png", __ASSET__img_startmenuicon_png);
 		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		className.set ("img/playButtonIcon.png", __ASSET__img_playbuttonicon_png);
-		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#elseif html5
 		
+		path.set ("img/playButtonIcon.png", "img/playButtonIcon.png");
+		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/projectileIcon.png", "img/projectileIcon.png");
 		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/startMenuIcon.png", "img/startMenuIcon.png");
 		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
-		path.set ("img/playButtonIcon.png", "img/playButtonIcon.png");
-		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#else
@@ -495,9 +495,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if pixi
 #elseif flash
 
+class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_projectileicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_startmenuicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
-class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 
 
 #elseif html5

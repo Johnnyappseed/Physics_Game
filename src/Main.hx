@@ -68,7 +68,7 @@ class Main extends Sprite
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
 		debugDraw.setDrawScale (1 / PHYSICS_SCALE);
-		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_shapeBit+ B2DebugDraw.e_aabbBit );// + B2DebugDraw.e_aabbBit);
+		debugDraw.setFlags ( B2DebugDraw.e_shapeBit );// + B2DebugDraw.e_aabbBit);
 		
 		//shows fancy physics objects (remove before game is finished)
 		World.setDebugDraw(debugDraw);
@@ -109,6 +109,26 @@ class Main extends Sprite
 		return body;
 	}
 	
+	public function createRope (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float, friction:Float):B2Body
+	{
+		//create body definition
+		var bodyDefinition = new B2BodyDef ();
+		bodyDefinition.position.set (x * PHYSICS_SCALE, y * PHYSICS_SCALE);
+		if (dynamicBody) bodyDefinition.type = B2Body.b2_dynamicBody;
+		
+		//create fixture definition
+		var fixtureDefinition = new B2FixtureDef ();
+		var polygon = new B2PolygonShape();
+		polygon.setAsBox ((width / 2) * PHYSICS_SCALE, (height / 2) * PHYSICS_SCALE);
+		fixtureDefinition.shape = polygon;
+		fixtureDefinition.density = density;
+		fixtureDefinition.friction = friction;
+		
+		//put fixture+body def into a body to return
+		var body = World.createBody (bodyDefinition);
+		body.createFixture (fixtureDefinition);
+		return body;
+	}
 	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):B2Body 
 	{
 		//create body definition
@@ -191,8 +211,7 @@ class Main extends Sprite
 		
 		revoluteJointDef.maxMotorTorque = 1.0;
 		revoluteJointDef.enableMotor = true;
-		
-		return revoluteJointDef;
+		World.createJoint(revoluteJointDef);
 	}
 	
 	public function new() 
