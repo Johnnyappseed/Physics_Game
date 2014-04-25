@@ -35,11 +35,8 @@ class Main extends Sprite
 	public var World:B2World;
 	var gameStarted:Bool = false;
 	
-	//what?
-	private var topBlock:B2Body;
-	
 	//game canvas, menus, buttons, etc.
-	var gameCanvas:Game_Canvas;
+	public var gameCanvas:Game_Canvas;
 	var startMenu:Sprite;
 	var playButton:Sprite;
 
@@ -68,7 +65,7 @@ class Main extends Sprite
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
 		debugDraw.setDrawScale (1 / PHYSICS_SCALE);
-		debugDraw.setFlags ( B2DebugDraw.e_shapeBit );// + B2DebugDraw.e_aabbBit);
+		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_aabbBit + B2DebugDraw.e_shapeBit );// + B2DebugDraw.e_aabbBit);
 		
 		//shows fancy physics objects (remove before game is finished)
 		World.setDebugDraw(debugDraw);
@@ -88,7 +85,7 @@ class Main extends Sprite
 		gameStarted = true;
 	}
 
-	public function createBox (x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
+	public function createBox(x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
 	{
 		//create body definition
 		var bodyDefinition = new B2BodyDef ();

@@ -13,7 +13,7 @@ import Math;
 class Projectile extends Sprite 
 {
 	var sprite:Sprite;
-	var circle:B2Body;
+	public var circle:B2Body;
 	
 	public function new(x:Int, y:Int) 
 	{
