@@ -32,7 +32,7 @@ class Main extends Sprite
 	public static var game;
 	public static var PHYSICS_SCALE:Float = 1.0 / 30;
 	private var PhysicsDebug:Sprite;
-	public var World:B2World;
+	public static var World:B2World;
 	var gameStarted:Bool = false;
 	
 	//game canvas, menus, buttons, etc.
@@ -210,7 +210,7 @@ class Main extends Sprite
 		
 		revoluteJointDef.maxMotorTorque = 1.0;
 		revoluteJointDef.enableMotor = true;
-		World.createJoint(revoluteJointDef);
+		return revoluteJointDef;
 	}
 	
 	public function new() 
