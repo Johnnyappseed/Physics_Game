@@ -41,7 +41,6 @@ class Launcher extends Sprite
 		staticCircle = Main.game.createCircle(x, y, 15, false);
 		//log and angle
 		log = Main.game.createBox(x - 35, y + 35, 300, 20, false, 1.0);
-		//log.setType(B2Body.b2_dynamicBody);
 		log.setAngle( -0.7853981633974483);
 		//jointed log to center
 		logJointDef = Main.game.revoluteJointFunction(staticCircle, log, staticCircle.getWorldCenter());
@@ -66,7 +65,15 @@ class Launcher extends Sprite
 		body = Game_Canvas.game_Canvas.rock.circle;
 		projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
 		projectileJoint=Main.World.createJoint(projectileJointDef);
-		//Main.World.destroyJoint(projectileJoint);
 	}
+	public function increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents()
+	{
+		log.setType(B2Body.b2_dynamicBody);
+	}
+	public function firer()
+	{
+		Main.World.destroyJoint(projectileJoint);
+	}
+	
 	
 }

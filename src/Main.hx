@@ -39,6 +39,8 @@ class Main extends Sprite
 	public var gameCanvas:Game_Canvas;
 	var startMenu:Sprite;
 	var playButton:Sprite;
+	
+	var goodToLaunch:Bool;
 
 	/* ENTRY POINT */
 	
@@ -56,6 +58,8 @@ class Main extends Sprite
 		PhysicsDebug = new Sprite ();
 		addChild (PhysicsDebug);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
+		
+		goodToLaunch = false;
 		
 		gameCanvas = new Game_Canvas();
 		this.addChild(gameCanvas);
@@ -85,6 +89,7 @@ class Main extends Sprite
 	{
 		this.removeChild(startMenu);
 		gameStarted = true;
+		gameCanvas.enable();
 	}
 
 	public function createBox(x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
@@ -200,6 +205,12 @@ class Main extends Sprite
 		
 		if (gameStarted) {
 			gameCanvas.rock.act();
+			if (gameCanvas.keyCheck(32)) 
+			{
+				gameCanvas.catapult.increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents();
+				if (goodToLaunch = true) gameCanvas.catapult.firer();
+				goodToLaunch = true;
+			}
 		}
 	}
 	
