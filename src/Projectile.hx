@@ -15,7 +15,7 @@ import flash.text.TextFormat;
 class Projectile extends Sprite 
 {
 	var sprite:Sprite;
-	var circle:B2Body;
+	public var circle:B2Body;
 	
 	//text stuff
 	var textField:TextField;
