@@ -42,6 +42,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/playButtonIcon.png", __ASSET__img_playbuttonicon_png);
 		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/grassIcon.png", __ASSET__img_grassicon_png);
+		type.set ("img/grassIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#elseif html5
@@ -52,6 +54,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/playButtonIcon.png", "img/playButtonIcon.png");
 		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/grassIcon.png", "img/grassIcon.png");
+		type.set ("img/grassIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		
 		#else
@@ -498,9 +502,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 class __ASSET__img_projectileicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_startmenuicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_grassicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 
 
 #elseif html5
+
 
 
 

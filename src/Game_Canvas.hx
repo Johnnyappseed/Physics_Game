@@ -2,6 +2,8 @@ package ;
 
 import box2D.dynamics.B2Body;
 import flash.display.Sprite;
+import openfl.Assets;
+import flash.display.Bitmap;
 
 /**
  * ...
@@ -12,7 +14,7 @@ class Game_Canvas extends Sprite
 {
 	public var catapult:Launcher;
 	public var rock:Projectile;
-	public var ground:B2Body;
+	public var grass:B2Body;
 
 	public function new() 
 	{
@@ -24,7 +26,20 @@ class Game_Canvas extends Sprite
 		rock = new Projectile(100, 240);
 		this.addChild(rock);
 		
-		ground = Main.game.createBox(400, 480, 800, 10, false,1.0);
+		//create grass
+		grass = Main.game.createBox(600, 480, 2000, 7, false, 1.0);
+		
+		//create sprite for grass
+		var grassIcon = new Bitmap(Assets.getBitmapData("img/grassIcon.png"));
+		var grassSprite = new Sprite();
+		grassSprite.addChild(grassIcon);
+		grassSprite.x = -grassIcon.width / 2;
+		grassSprite.y = -grassIcon.height / 2;
+		this.addChild(grassSprite);
+		
+		//put grass sprite on screen
+		grassSprite.x = 0;
+		grassSprite.y = 472;
 	}
 	
 }
