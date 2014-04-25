@@ -60,10 +60,14 @@ class Main extends Sprite
 		addChild (PhysicsDebug);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
 		
+		gameCanvas = new Game_Canvas();
+		this.addChild(gameCanvas);
+		
 		//create+add start menu and buttons
 		startMenu = createMenu("startMenuIcon.png");
 		this.addChild(startMenu);
 		playButton = createButtonAt(300, 300, "playButtonIcon.png", startMenu);
+		
 		
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
@@ -83,8 +87,6 @@ class Main extends Sprite
 	public function startGame(e) 
 	{
 		this.removeChild(startMenu);
-		gameCanvas = new Game_Canvas();
-		this.addChild(gameCanvas);
 		gameStarted = true;
 	}
 

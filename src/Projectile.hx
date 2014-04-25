@@ -5,6 +5,8 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import box2D.collision.shapes.B2CircleShape;
 import Math;
+import flash.text.TextField;
+import flash.text.TextFormat;
 
 /**
  * ...
@@ -14,6 +16,10 @@ class Projectile extends Sprite
 {
 	var sprite:Sprite;
 	var circle:B2Body;
+	
+	//text stuff
+	var textField:TextField;
+	var textFormat:TextFormat;
 	
 	public function new(x:Int, y:Int) 
 	{
@@ -33,6 +39,21 @@ class Projectile extends Sprite
 		//put sprite on screen
 		this.x = x;
 		this.y = y;
+		
+		//add whimsical words to rock
+		textField = new TextField();
+		textFormat = new TextFormat();
+		
+		textFormat.font = "Comic Sans MS";
+		textFormat.size = 15;
+		textFormat.color = 0xFF0000;
+		
+		textField.text = 'kill me';
+		textField.setTextFormat(textFormat);
+		sprite.addChild(textField);
+		
+		textField.x = 4;
+		textField.y = -14;
 	}
 	
 	public function act()
