@@ -12,18 +12,34 @@ import flash.display.Bitmap;
  */
 class Game_Canvas extends Sprite
 {
+	public static var game_Canvas;
+	
+	//projectiles
 	public var catapult:Launcher;
 	public var grass:B2Body;
 	public var rock:Projectile;
-	public static var game_Canvas;
+	
+	//castle blocks
+	public var topBlock:Castle_Block;
+	public var leftBlock:Castle_Block;
+	public var rightBlock:Castle_Block;
+	
+	//lists
+	public var castleBlocks:List<Castle_Block>;
 
 	public function new() 
 	{
 		super();
 		game_Canvas = this;
+		
+		//initialize things
+		castleBlocks = new List<Castle_Block>();
+		
+		//create projectiles
 		rock = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
 		this.addChild(rock);
 		
+		//create catapult
 		catapult = new Launcher(400, 300);
 		this.addChild(catapult);
 		
@@ -41,6 +57,17 @@ class Game_Canvas extends Sprite
 		//put grass sprite on screen
 		grassSprite.x = 0;
 		grassSprite.y = 472;
+		
+		//create castle blocks!
+		leftBlock = new Castle_Block(550, 300, 2, false);
+		castleBlocks.add(leftBlock);
+		this.addChild(leftBlock);
+		rightBlock = new Castle_Block(520, 400, 1, true);
+		castleBlocks.add(rightBlock);
+		this.addChild(rightBlock);
+		topBlock = new Castle_Block(580, 400, 1, true);
+		castleBlocks.add(topBlock);
+		this.addChild(topBlock);
 	}
 	
 }

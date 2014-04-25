@@ -200,6 +200,7 @@ class Main extends Sprite
 		
 		if (gameStarted) {
 			gameCanvas.rock.act();
+			for (b in gameCanvas.castleBlocks) b.act();
 		}
 	}
 	
