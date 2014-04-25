@@ -42,6 +42,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("img/startMenuIcon.png", __ASSET__img_startmenuicon_png);
 		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+<<<<<<< HEAD
+=======
+		className.set ("img/playButtonIcon.png", __ASSET__img_playbuttonicon_png);
+		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("img/grassIcon.png", __ASSET__img_grassicon_png);
+		type.set ("img/grassIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+>>>>>>> d56a62786c008a643011da4f134544df448db98c
 		
 		
 		#elseif html5
@@ -52,6 +59,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("img/projectileIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		path.set ("img/startMenuIcon.png", "img/startMenuIcon.png");
 		type.set ("img/startMenuIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+<<<<<<< HEAD
+=======
+		path.set ("img/playButtonIcon.png", "img/playButtonIcon.png");
+		type.set ("img/playButtonIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		path.set ("img/grassIcon.png", "img/grassIcon.png");
+		type.set ("img/grassIcon.png", Reflect.field (AssetType, "image".toUpperCase ()));
+>>>>>>> d56a62786c008a643011da4f134544df448db98c
 		
 		
 		#else
@@ -498,9 +512,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_projectileicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class __ASSET__img_startmenuicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+<<<<<<< HEAD
+=======
+class __ASSET__img_playbuttonicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class __ASSET__img_grassicon_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+>>>>>>> d56a62786c008a643011da4f134544df448db98c
 
 
 #elseif html5
+
 
 
 
