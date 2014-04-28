@@ -209,7 +209,7 @@ class Main extends Sprite
 			if (gameCanvas.keyCheck(32)) 
 			{
 				gameCanvas.catapult.increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents();
-				if (goodToLaunch = true) gameCanvas.catapult.firer();
+				//if (goodToLaunch = true) gameCanvas.catapult.firer();
 				goodToLaunch = true;
 			}
 		}
