@@ -40,8 +40,10 @@ class Main extends Sprite
 	var startMenu:Sprite;
 	var playButton:Sprite;
 	
-	var goodToLaunch:Bool;
-
+	//screen positioning var'sss
+	var xv:Float;
+	var yv:Float;
+	
 	/* ENTRY POINT */
 	
 	function resize(e) 
@@ -52,14 +54,16 @@ class Main extends Sprite
 	
 	function init() 
 	{
+		//initial values
 		if (inited) return;
 		inited = true;
 		game = this;
 		PhysicsDebug = new Sprite ();
+		xv = 0.0;
+		yv = 0.0;
+		
 		addChild (PhysicsDebug);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
-		
-		goodToLaunch = false;
 		
 		gameCanvas = new Game_Canvas();
 		this.addChild(gameCanvas);
@@ -199,20 +203,30 @@ class Main extends Sprite
 		World.drawDebugData ();*/
 		
 		World.step (1 / Lib.current.stage.frameRate, 10, 10);
+		
 		//dude.update();
 		World.clearForces ();
 		World.drawDebugData ();
 		
 		if (gameStarted) {
-			gameCanvas.rock.act();
+			gameCanvas.ammo.act();
 			for (b in gameCanvas.castleBlocks) b.act();
-			if (gameCanvas.keyCheck(32)) 
-			{
-				gameCanvas.catapult.increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents();
-				//if (goodToLaunch = true) gameCanvas.catapult.firer();
-				goodToLaunch = true;
-			}
 		}
+		
+		//screen movement
+		if (gameCanvas.ammo.x > 600 && gameCanvas.ammo.x < 6000)
+		{
+			xv = (-gameCanvas.ammo.x+400) - (this.x) * 0.5;
+			this.x -= xv;
+		}
+		
+		if (-gameCanvas.ammo.y+240 > 0)
+		{
+			trace(this.y);
+			yv = (-gameCanvas.ammo.y+240 - (this.y+240)) * 0.5;
+			this.y += yv;
+		}
+		
 	}
 	
 	public function revoluteJointFunction(first:B2Body, second:B2Body, point:B2Vec2)

@@ -20,7 +20,7 @@ class Game_Canvas extends Sprite
 	//projectiles
 	public var catapult:Launcher;
 	public var grass:B2Body;
-	public var rock:Projectile;
+	public var ammo:Projectile;
 	
 	//castle blocks
 	public var topBlock:Castle_Block;
@@ -30,19 +30,22 @@ class Game_Canvas extends Sprite
 	//lists
 	public var castleBlocks:List<Castle_Block>;
 	var keys:Array<Int>;
+	
+	var goodToLaunch:Bool;
 
 	public function new() 
 	{
 		super();
 		keys = new Array<Int>();
 		game_Canvas = this;
+		goodToLaunch = false;
 		
 		//initialize things
 		castleBlocks = new List<Castle_Block>();
 		
 		//create projectiles
-		rock = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
-		this.addChild(rock);
+		ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
+		this.addChild(ammo);
 		
 		//create catapult
 		catapult = new Launcher(400, 300);
@@ -77,9 +80,14 @@ class Game_Canvas extends Sprite
 	
 	public function keyDown(e:KeyboardEvent):Void
 	{
-		if (! keyCheck(e.keyCode)) keys.push(e.keyCode);
+		//if (! keyCheck(e.keyCode)) keys.push(e.keyCode);
+		if (e.keyCode==32)
+		{
+			catapult.increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents();
+			if (goodToLaunch == true) catapult.firer();
+			goodToLaunch = true;
+		}
 	}
-
 
 	public function keyUp(e:KeyboardEvent):Void
 	{
@@ -94,6 +102,7 @@ class Game_Canvas extends Sprite
 		}
 		return false;
 	}
+	
 	
 	public function disable()
 	{

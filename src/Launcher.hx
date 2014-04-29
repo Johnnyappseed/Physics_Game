@@ -60,9 +60,9 @@ class Launcher extends Sprite
 			Main.World.createJoint(fillerJointsDef);
 			link = body;
 		}
-		//add rock and link to rope
+		//add ammo and link to rope
 		
-		body = Game_Canvas.game_Canvas.rock.circle;
+		body = Game_Canvas.game_Canvas.ammo.circle;
 		projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
 		projectileJoint=Main.World.createJoint(projectileJointDef);
 	}

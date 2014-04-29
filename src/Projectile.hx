@@ -40,7 +40,7 @@ class Projectile extends Sprite
 		this.x = x;
 		this.y = y;
 		
-		//add whimsical words to rock
+		//add whimsical words to ammo
 		textField = new TextField();
 		textFormat = new TextFormat();
 		
