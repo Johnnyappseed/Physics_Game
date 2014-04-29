@@ -52,7 +52,7 @@ class Game_Canvas extends Sprite
 		this.addChild(catapult);
 		
 		//create grass
-		grass = Main.game.createBox(600, 480, 2000, 7, false, 1.0);
+		grass = Main.game.createBox(600, 480, 6000, 7, false, 1.0);
 		
 		//create sprite for grass
 		var grassIcon = new Bitmap(Assets.getBitmapData("img/grassIcon.png"));

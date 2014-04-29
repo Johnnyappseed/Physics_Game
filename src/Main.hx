@@ -214,16 +214,15 @@ class Main extends Sprite
 		}
 		
 		//screen movement
-		if (gameCanvas.ammo.x > 600 && gameCanvas.ammo.x < 6000)
-		{
-			xv = (-gameCanvas.ammo.x+400) - (this.x) * 0.5;
-			this.x -= xv;
-		}
+		//if (gameCanvas.ammo.x > 600 && gameCanvas.ammo.x < 6000)
+		//{
+		//	xv = (-gameCanvas.ammo.x+400) - (this.x) * 0.5;
+		//	this.x -= xv;
+		//}
 		
-		if (-gameCanvas.ammo.y+240 > 0)
+		if (gameCanvas.ammo.y < 240)
 		{
-			trace(this.y);
-			yv = (-gameCanvas.ammo.y+240 - (this.y+240)) * 0.5;
+			yv = (-gameCanvas.ammo.y+240) - (this.y) * 0.5;
 			this.y += yv;
 		}
 		
