@@ -7,6 +7,7 @@ import flash.Lib;
 import flash.display.Bitmap;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
+import motion.Actuate;
 
 /**
  * ...
@@ -31,14 +32,18 @@ class Game_Canvas extends Sprite
 	public var castleBlocks:List<Castle_Block>;
 	var keys:Array<Int>;
 	
-	var goodToLaunch:Bool;
+	public var lookingAtLauncher:Bool;
+	public var launching:Bool;
+	public var fired:Bool;
 
 	public function new() 
 	{
 		super();
 		keys = new Array<Int>();
 		game_Canvas = this;
-		goodToLaunch = false;
+		lookingAtLauncher = false;
+		launching = false;
+		fired = false;
 		
 		//initialize things
 		castleBlocks = new List<Castle_Block>();
@@ -83,9 +88,27 @@ class Game_Canvas extends Sprite
 		//if (! keyCheck(e.keyCode)) keys.push(e.keyCode);
 		if (e.keyCode==32)
 		{
-			catapult.increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents();
-			if (goodToLaunch == true) catapult.firer();
-			goodToLaunch = true;
+			if (lookingAtLauncher)
+			{
+				catapult.increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents();
+				if (launching == true) 
+				{
+					catapult.firer();
+					fired = true;
+					lookingAtLauncher = false;
+					launching = false;
+				}
+				else 
+				{
+					launching = true;
+				}
+			}
+			else 
+			{
+				fired = false;
+				lookingAtLauncher = true;
+				Actuate.tween(Main.game, 1, { x : 0, y : 0 } );
+			}
 		}
 	}
 

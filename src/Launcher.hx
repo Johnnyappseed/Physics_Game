@@ -33,21 +33,32 @@ class Launcher extends Sprite
 	var fillerJointsDef:B2RevoluteJointDef;
 	var projectileJointDef:B2RevoluteJointDef;
 	var projectileJoint:B2Joint;
+	
+	var ropeLinks:Array;
+	var ropeJoints:Array;
+	
+	var joint:B2Vec2; 
+	var LOG_X:Int;
+	var LOG_Y:Int;
+	var LOG_ANGLE:Float;
+	var WIEGHT_X:Int;
+	var WIEGHT_Y:Int;
+	var ROPE_Y:Int;
 
 	public function new(x:Int, y:Int) 
 	{
 		super();
+		ropeLinks = new Array[13];
 		//center point
 		staticCircle = Main.game.createCircle(x, y, 15, false);
 		//log and angle
-		log = Main.game.createBox(x - 35, y + 35, 300, 20, false, 1.0);
-		log.setAngle( -0.7853981633974483);
+		log = Main.game.createBox( LOG_X = (x - 35), LOG_Y = (y + 35), 300, 20, false, 1.0);
+		log.setAngle( LOG_ANGLE = (-0.7853981633974483));
 		//jointed log to center
 		logJointDef = Main.game.revoluteJointFunction(staticCircle, log, staticCircle.getWorldCenter());
 		Main.World.createJoint(logJointDef);
 		//wieght, jointed to log
-		wieght = Main.game.createBox(x + 50, y, 45, 40, true, 20.0);
-		var joint:B2Vec2; 
+		wieght = Main.game.createBox(WIEGHT_X = (x + 50), WIEGHT_Y = (y), 45, 40, true, 20.0);
 		joint = new B2Vec2((x+50) * Main.PHYSICS_SCALE,(y-50) * Main.PHYSICS_SCALE);
 		wieghtJointDef = Main.game.revoluteJointFunction(log, wieght, joint);
 		Main.World.createJoint(wieghtJointDef);
@@ -55,7 +66,7 @@ class Launcher extends Sprite
 		//rope
 		for (i in 1...13)
 		{
-			body = Main.game.createRope(x - 141 + (i*10) - 5, y+141, 10, 4, true, 1.0, 0.2);
+			body = Main.game.createRope(x - 141 + (i*10) - 5,ROPE_Y = (y+141), 10, 4, true, 1.0, 0.2);
 			fillerJointsDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (i * 10) - 10)*Main.PHYSICS_SCALE,(y+141)*Main.PHYSICS_SCALE));
 			Main.World.createJoint(fillerJointsDef);
 			link = body;
@@ -73,6 +84,10 @@ class Launcher extends Sprite
 	public function firer()
 	{
 		Main.World.destroyJoint(projectileJoint);
+	}
+	public function reset()
+	{
+		Main.World.destroyBody(
 	}
 	
 	

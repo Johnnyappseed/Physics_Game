@@ -18,6 +18,7 @@ import flash.display.BitmapData;
 import openfl.Assets;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import motion.Actuate;
 
 /**
  * ...
@@ -94,6 +95,7 @@ class Main extends Sprite
 		this.removeChild(startMenu);
 		gameStarted = true;
 		gameCanvas.enable();
+		this.x = 200;
 	}
 
 	public function createBox(x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
@@ -214,18 +216,40 @@ class Main extends Sprite
 		}
 		
 		//screen movement
-		//if (gameCanvas.ammo.x > 600 && gameCanvas.ammo.x < 6000)
-		//{
-		//	xv = (-gameCanvas.ammo.x+400) - (this.x) * 0.5;
-		//	this.x -= xv;
-		//}
-		
-		if (gameCanvas.ammo.y < 240)
+		if (gameCanvas.ammo.x < 0)
 		{
-			yv = (-gameCanvas.ammo.y+240) - (this.y) * 0.5;
-			this.y += yv;
+			this.x = this.x * 0.05;
+		}
+		else if (gameCanvas.ammo.x > 3000 && gameCanvas.fired == true )
+		{
+			//xv value should be the average position of all the castle blocks plus/minus half the screen
+			xv = 0;
+			this.x = xv * 0.05;
+		}
+		else if (gameCanvas.fired)
+		{
+			xv = (-gameCanvas.ammo.x)+400 - (this.x);
+			this.x += xv * 0.05;
+		}
+		//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
+		//else if ()
+		//{
+		//	
+		//}
+		else 
+		{
+			this.x = this.x * 0.02;
 		}
 		
+		if ((( -gameCanvas.ammo.y) + 240 > 0) && gameCanvas.ammo.x > 0 && gameCanvas.fired == true )
+		{
+			yv = (-gameCanvas.ammo.y)+240 - (this.y);
+			this.y += yv * 0.5;
+		}
+		else 
+		{
+			this.y = this.y * 0.05;
+		}
 	}
 	
 	public function revoluteJointFunction(first:B2Body, second:B2Body, point:B2Vec2)
