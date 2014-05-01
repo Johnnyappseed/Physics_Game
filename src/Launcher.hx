@@ -48,15 +48,16 @@ class Launcher extends Sprite
 	var WIEGHT_Y:Int;
 	var ROPE_Y:Int;
 	
-	public var ammo:Projectile;
+	var ammo:Projectile;
 
 	
 	public function new(x:Int, y:Int) 
 	{
 		super();
-		//trace(Main.game.gameCanvas);
+		trace(Main.game.gameCanvas);
 		//make it to where when you press play that it starts up the launcher and whatnot
-		Main.game.gameCanvas.ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
+		ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300 + 141);
+		Main.game.gameCanvas.ammoBelt.push(ammo);
 		Main.game.gameCanvas.addChild(ammo);
 		
 		ropeLinks = new Array();
@@ -87,9 +88,9 @@ class Launcher extends Sprite
 		}
 		//add ammo and link to rope
 		//trace(Main.game.gameCanvas);
-		//body = ammo.circle;
-		//projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
-		//projectileJoint=Main.World.createJoint(projectileJointDef);
+		body = ammo.circle;
+		projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
+		projectileJoint=Main.World.createJoint(projectileJointDef);
 	}
 	public function increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents()
 	{
@@ -99,22 +100,24 @@ class Launcher extends Sprite
 	{
 		Main.World.destroyJoint(projectileJoint);
 	}
-	public function reset()
+	public function destroy()
 	{
 		Main.World.destroyJoint(wieghtJoint);
 		Main.World.destroyJoint(logJoint);
 		for (i in ropeJoints)
 		{
-			Main.World.destroyJoint(i);
 			ropeJoints.remove(i);
+			Main.World.destroyJoint(i);
 		}
 		for (i in ropeLinks)
 		{
-			Main.World.destroyBody(i);
+			trace(i);
 			ropeLinks.remove(i);
+			Main.World.destroyBody(i);
 		}
 		Main.World.destroyBody(wieght);
 		Main.World.destroyBody(log);
+		Main.World.destroyBody(staticCircle);
 		
 	}
 	

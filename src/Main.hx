@@ -215,13 +215,13 @@ class Main extends Sprite
 		if (gameStarted) 
 		{
 			gameCanvas.act();
-			
+			var b:Projectile = gameCanvas.ammoBelt[gameCanvas.ammoBelt.length-1];
 			//screen movement
-			if (gameCanvas.catapult.ammo.x < 0)
+			if (b.x < 0)
 			{
 				this.x = this.x * 0.05;
 			}
-			else if (gameCanvas.catapult.ammo.x > 3000 && gameCanvas.fired == true )
+			else if (b.x > 3000 && gameCanvas.fired == true )
 			{
 				//xv value should be the average position of all the castle blocks plus/minus half the screen
 				xv = 0;
@@ -229,7 +229,7 @@ class Main extends Sprite
 			}
 			else if (gameCanvas.fired)
 			{
-				xv = (-gameCanvas.catapult.ammo.x)+400 - (this.x);
+				xv = (-b.x)+400 - (this.x);
 				this.x += xv * 0.05;
 			}
 			//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
@@ -242,9 +242,9 @@ class Main extends Sprite
 				this.x = this.x * 0.02;
 			}
 			
-			if ((( -gameCanvas.catapult.ammo.y) + 240 > 0) && gameCanvas.catapult.ammo.x > 0 && gameCanvas.fired == true )
+			if ((( -b.y) + 240 > 0) && b.x > 0 && gameCanvas.fired == true )
 			{
-				yv = (-gameCanvas.catapult.ammo.y)+240 - (this.y);
+				yv = (-b.y)+240 - (this.y);
 				this.y += yv * 0.5;
 			}
 			else 

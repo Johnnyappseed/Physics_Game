@@ -48,6 +48,7 @@ class Game_Canvas extends Sprite
 		
 		//initialize things
 		castleBlocks = new List<Castle_Block>();
+		ammoBelt = new Array();
 		
 		//create projectiles
 		//ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
@@ -104,6 +105,10 @@ class Game_Canvas extends Sprite
 			}
 			else 
 			{
+				catapult.destroy();
+				this.removeChild(catapult);
+				catapult = new Launcher(400, 300);
+				this.addChild(catapult);
 				fired = false;
 				lookingAtLauncher = true;
 				Actuate.tween(Main.game, 1, { x : 0, y : 0 } );
@@ -129,11 +134,14 @@ class Game_Canvas extends Sprite
 	{
 		catapult = new Launcher(400, 300);
 		this.addChild(catapult);
+		var a:Projectile = ammoBelt.pop();
+		this.removeChild(a);
+		Main.World.destroyBody(a.circle);
 	}
 	
 	public function act()
 	{
-		catapult.ammo.act();
+		for (a in ammoBelt) a.act();
 		for (b in castleBlocks) b.act();
 	}
 	
