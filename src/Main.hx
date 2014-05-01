@@ -96,6 +96,7 @@ class Main extends Sprite
 		gameStarted = true;
 		gameCanvas.enable();
 		this.x = 200;
+		gameCanvas.creation();
 	}
 
 	public function createBox(x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
@@ -210,45 +211,46 @@ class Main extends Sprite
 		World.clearForces ();
 		World.drawDebugData ();
 		
-		if (gameStarted) {
-			gameCanvas.ammo.act();
-			for (b in gameCanvas.castleBlocks) b.act();
-		}
-		
-		//screen movement
-		if (gameCanvas.ammo.x < 0)
+		//game act'ions
+		if (gameStarted) 
 		{
-			this.x = this.x * 0.05;
-		}
-		else if (gameCanvas.ammo.x > 3000 && gameCanvas.fired == true )
-		{
-			//xv value should be the average position of all the castle blocks plus/minus half the screen
-			xv = 0;
-			this.x = xv * 0.05;
-		}
-		else if (gameCanvas.fired)
-		{
-			xv = (-gameCanvas.ammo.x)+400 - (this.x);
-			this.x += xv * 0.05;
-		}
-		//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
-		//else if ()
-		//{
-		//	
-		//}
-		else 
-		{
-			this.x = this.x * 0.02;
-		}
-		
-		if ((( -gameCanvas.ammo.y) + 240 > 0) && gameCanvas.ammo.x > 0 && gameCanvas.fired == true )
-		{
-			yv = (-gameCanvas.ammo.y)+240 - (this.y);
-			this.y += yv * 0.5;
-		}
-		else 
-		{
-			this.y = this.y * 0.05;
+			gameCanvas.act();
+			
+			//screen movement
+			if (gameCanvas.catapult.ammo.x < 0)
+			{
+				this.x = this.x * 0.05;
+			}
+			else if (gameCanvas.catapult.ammo.x > 3000 && gameCanvas.fired == true )
+			{
+				//xv value should be the average position of all the castle blocks plus/minus half the screen
+				xv = 0;
+				this.x = xv * 0.05;
+			}
+			else if (gameCanvas.fired)
+			{
+				xv = (-gameCanvas.catapult.ammo.x)+400 - (this.x);
+				this.x += xv * 0.05;
+			}
+			//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
+			//else if ()
+			//{
+			//	
+			//}
+			else 
+			{
+				this.x = this.x * 0.02;
+			}
+			
+			if ((( -gameCanvas.catapult.ammo.y) + 240 > 0) && gameCanvas.catapult.ammo.x > 0 && gameCanvas.fired == true )
+			{
+				yv = (-gameCanvas.catapult.ammo.y)+240 - (this.y);
+				this.y += yv * 0.5;
+			}
+			else 
+			{
+				this.y = this.y * 0.05;
+			}
 		}
 	}
 	

@@ -16,12 +16,10 @@ import motion.Actuate;
  */
 class Game_Canvas extends Sprite
 {
-	public static var game_Canvas;
 	
 	//projectiles
 	public var catapult:Launcher;
 	public var grass:B2Body;
-	public var ammo:Projectile;
 	
 	//castle blocks
 	public var topBlock:Castle_Block;
@@ -35,12 +33,15 @@ class Game_Canvas extends Sprite
 	public var lookingAtLauncher:Bool;
 	public var launching:Bool;
 	public var fired:Bool;
+	
+	public var ammoBelt:Array<Projectile>;
+	public var ammo:Projectile;
+	
 
 	public function new() 
 	{
 		super();
 		keys = new Array<Int>();
-		game_Canvas = this;
 		lookingAtLauncher = false;
 		launching = false;
 		fired = false;
@@ -49,12 +50,10 @@ class Game_Canvas extends Sprite
 		castleBlocks = new List<Castle_Block>();
 		
 		//create projectiles
-		ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
-		this.addChild(ammo);
+		//ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
+		//this.addChild(ammo);
 		
 		//create catapult
-		catapult = new Launcher(400, 300);
-		this.addChild(catapult);
 		
 		//create grass
 		grass = Main.game.createBox(600, 480, 6000, 7, false, 1.0);
@@ -126,6 +125,17 @@ class Game_Canvas extends Sprite
 		return false;
 	}
 	
+	public function creation()
+	{
+		catapult = new Launcher(400, 300);
+		this.addChild(catapult);
+	}
+	
+	public function act()
+	{
+		catapult.ammo.act();
+		for (b in castleBlocks) b.act();
+	}
 	
 	public function disable()
 	{

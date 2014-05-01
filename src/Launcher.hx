@@ -29,13 +29,16 @@ class Launcher extends Sprite
 	var link:B2Body;
 	var body:B2Body;
 	var wieghtJointDef:B2RevoluteJointDef;
+	var wieghtJoint:B2Joint;
 	var logJointDef:B2RevoluteJointDef;
-	var fillerJointsDef:B2RevoluteJointDef;
+	var logJoint:B2Joint;
+	var ropeJointsDef:B2RevoluteJointDef;
+	var ropeJoint:B2Joint;
 	var projectileJointDef:B2RevoluteJointDef;
 	var projectileJoint:B2Joint;
 	
-	var ropeLinks:Array;
-	var ropeJoints:Array;
+	var ropeLinks:Array<B2Body>;
+	var ropeJoints:Array<B2Joint>;
 	
 	var joint:B2Vec2; 
 	var LOG_X:Int;
@@ -44,38 +47,49 @@ class Launcher extends Sprite
 	var WIEGHT_X:Int;
 	var WIEGHT_Y:Int;
 	var ROPE_Y:Int;
+	
+	public var ammo:Projectile;
 
+	
 	public function new(x:Int, y:Int) 
 	{
 		super();
-		ropeLinks = new Array[13];
-		//center point
+		//trace(Main.game.gameCanvas);
+		//make it to where when you press play that it starts up the launcher and whatnot
+		Main.game.gameCanvas.ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
+		Main.game.gameCanvas.addChild(ammo);
+		
+		ropeLinks = new Array();
+		ropeJoints = new Array();
+		//center point 
 		staticCircle = Main.game.createCircle(x, y, 15, false);
 		//log and angle
 		log = Main.game.createBox( LOG_X = (x - 35), LOG_Y = (y + 35), 300, 20, false, 1.0);
 		log.setAngle( LOG_ANGLE = (-0.7853981633974483));
 		//jointed log to center
 		logJointDef = Main.game.revoluteJointFunction(staticCircle, log, staticCircle.getWorldCenter());
-		Main.World.createJoint(logJointDef);
+		logJoint = Main.World.createJoint(logJointDef);
 		//wieght, jointed to log
 		wieght = Main.game.createBox(WIEGHT_X = (x + 50), WIEGHT_Y = (y), 45, 40, true, 20.0);
 		joint = new B2Vec2((x+50) * Main.PHYSICS_SCALE,(y-50) * Main.PHYSICS_SCALE);
 		wieghtJointDef = Main.game.revoluteJointFunction(log, wieght, joint);
-		Main.World.createJoint(wieghtJointDef);
+		wieghtJoint = Main.World.createJoint(wieghtJointDef);
 		link = log;
 		//rope
-		for (i in 1...13)
+		for (i in 0...13)
 		{
 			body = Main.game.createRope(x - 141 + (i*10) - 5,ROPE_Y = (y+141), 10, 4, true, 1.0, 0.2);
-			fillerJointsDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (i * 10) - 10)*Main.PHYSICS_SCALE,(y+141)*Main.PHYSICS_SCALE));
-			Main.World.createJoint(fillerJointsDef);
+			ropeJointsDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (i * 10) - 10)*Main.PHYSICS_SCALE,(y+141)*Main.PHYSICS_SCALE));
+			ropeJoint = Main.World.createJoint(ropeJointsDef);
 			link = body;
+			ropeLinks.push(link);
+			ropeJoints.push(ropeJoint);
 		}
 		//add ammo and link to rope
-		
-		body = Game_Canvas.game_Canvas.ammo.circle;
-		projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
-		projectileJoint=Main.World.createJoint(projectileJointDef);
+		//trace(Main.game.gameCanvas);
+		//body = ammo.circle;
+		//projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
+		//projectileJoint=Main.World.createJoint(projectileJointDef);
 	}
 	public function increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents()
 	{
@@ -87,7 +101,21 @@ class Launcher extends Sprite
 	}
 	public function reset()
 	{
-		Main.World.destroyBody(
+		Main.World.destroyJoint(wieghtJoint);
+		Main.World.destroyJoint(logJoint);
+		for (i in ropeJoints)
+		{
+			Main.World.destroyJoint(i);
+			ropeJoints.remove(i);
+		}
+		for (i in ropeLinks)
+		{
+			Main.World.destroyBody(i);
+			ropeLinks.remove(i);
+		}
+		Main.World.destroyBody(wieght);
+		Main.World.destroyBody(log);
+		
 	}
 	
 	
