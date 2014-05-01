@@ -95,7 +95,7 @@ class Main extends Sprite
 		this.removeChild(startMenu);
 		gameStarted = true;
 		gameCanvas.enable();
-		this.x = 200;
+		this.x = -1000;
 		gameCanvas.creation();
 	}
 
@@ -225,12 +225,12 @@ class Main extends Sprite
 			{
 				//xv value should be the average position of all the castle blocks plus/minus half the screen
 				xv = 0;
-				this.x = xv * 0.05;
+				this.x = xv * 0.1;
 			}
 			else if (gameCanvas.fired)
 			{
 				xv = (-b.x)+400 - (this.x);
-				this.x += xv * 0.05;
+				this.x += xv * 0.1;
 			}
 			//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
 			//else if ()

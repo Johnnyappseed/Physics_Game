@@ -27,7 +27,6 @@ class Game_Canvas extends Sprite
 	public var rightBlock:Castle_Block;
 	
 	//lists
-	public var castleBlocks:List<Castle_Block>;
 	var keys:Array<Int>;
 	
 	public var lookingAtLauncher:Bool;
@@ -36,6 +35,8 @@ class Game_Canvas extends Sprite
 	
 	public var ammoBelt:Array<Projectile>;
 	public var ammo:Projectile;
+	
+	public var castle:Castle_1;
 	
 
 	public function new() 
@@ -47,14 +48,7 @@ class Game_Canvas extends Sprite
 		fired = false;
 		
 		//initialize things
-		castleBlocks = new List<Castle_Block>();
 		ammoBelt = new Array();
-		
-		//create projectiles
-		//ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300+141);
-		//this.addChild(ammo);
-		
-		//create catapult
 		
 		//create grass
 		grass = Main.game.createBox(600, 480, 6000, 7, false, 1.0);
@@ -70,17 +64,6 @@ class Game_Canvas extends Sprite
 		//put grass sprite on screen
 		grassSprite.x = 0;
 		grassSprite.y = 472;
-		
-		//create castle blocks!
-		leftBlock = new Castle_Block(550, 300, 2, false);
-		castleBlocks.add(leftBlock);
-		this.addChild(leftBlock);
-		rightBlock = new Castle_Block(520, 400, 1, true);
-		castleBlocks.add(rightBlock);
-		this.addChild(rightBlock);
-		topBlock = new Castle_Block(580, 400, 1, true);
-		castleBlocks.add(topBlock);
-		this.addChild(topBlock);
 	}
 	
 	public function keyDown(e:KeyboardEvent):Void
@@ -137,12 +120,13 @@ class Game_Canvas extends Sprite
 		var a:Projectile = ammoBelt.pop();
 		this.removeChild(a);
 		Main.World.destroyBody(a.circle);
+		castle = new Castle_1();
 	}
 	
 	public function act()
 	{
 		for (a in ammoBelt) a.act();
-		for (b in castleBlocks) b.act();
+		for (b in castle.castleBlocks) b.act();
 	}
 	
 	public function disable()
