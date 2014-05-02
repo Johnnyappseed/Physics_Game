@@ -38,6 +38,8 @@ class Game_Canvas extends Sprite
 	
 	public var castle:Castle_1;
 	
+	public var gg:Bool;
+	
 
 	public function new() 
 	{
@@ -46,6 +48,7 @@ class Game_Canvas extends Sprite
 		lookingAtLauncher = false;
 		launching = false;
 		fired = false;
+		gg = false;
 		
 		//initialize things
 		ammoBelt = new Array();
@@ -66,9 +69,25 @@ class Game_Canvas extends Sprite
 		grassSprite.y = 472;
 	}
 	
+	public function destroyAmmo()
+	{
+		for (i in ammoBelt)
+		{
+			Main.World.destroyBody(i.circle);
+			ammoBelt.remove(i);
+			trace("aaa");
+			this.removeChild(i);
+			trace("aaaaa");
+		}
+	}
+	
 	public function keyDown(e:KeyboardEvent):Void
 	{
 		//if (! keyCheck(e.keyCode)) keys.push(e.keyCode);
+		if (e.keyCode == 65)
+		{
+			gg = true;
+		}
 		if (e.keyCode==32)
 		{
 			if (lookingAtLauncher)
@@ -88,8 +107,7 @@ class Game_Canvas extends Sprite
 			}
 			else 
 			{
-				catapult.destroy();
-				this.removeChild(catapult);
+				catapultReset();
 				catapult = new Launcher(400, 300);
 				this.addChild(catapult);
 				fired = false;
@@ -113,6 +131,12 @@ class Game_Canvas extends Sprite
 		return false;
 	}
 	
+	public function catapultReset()
+	{
+		catapult.destroy();
+		this.removeChild(catapult);
+	}
+	
 	public function creation()
 	{
 		catapult = new Launcher(400, 300);
@@ -126,7 +150,11 @@ class Game_Canvas extends Sprite
 	public function act()
 	{
 		for (a in ammoBelt) a.act();
-		for (b in castle.castleBlocks) b.act();
+		castle.act();
+		if (castle.enemies.length == 0)
+		{
+			gg = true;
+		}
 		catapult.act();
 	}
 	
