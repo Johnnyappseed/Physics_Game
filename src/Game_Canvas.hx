@@ -75,9 +75,7 @@ class Game_Canvas extends Sprite
 		{
 			Main.World.destroyBody(i.circle);
 			ammoBelt.remove(i);
-			trace("aaa");
 			this.removeChild(i);
-			trace("aaaaa");
 		}
 	}
 	
