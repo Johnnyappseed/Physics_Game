@@ -10,7 +10,7 @@ import box2D.common.math.B2Vec2;
 import box2D.dynamics.B2Body;
 import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2DebugDraw;
-import box2D.dynamics.B2FixtureDef;
+import box2D.dynamics.B2FixtureDef; 
 import box2D.dynamics.B2World;
 import box2D.dynamics.joints.B2RevoluteJointDef;
 import box2D.dynamics.joints.B2RevoluteJoint;
