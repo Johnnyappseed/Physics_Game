@@ -93,10 +93,10 @@ class Main extends Sprite
 	public function startGame(e) 
 	{
 		this.removeChild(startMenu);
-		gameStarted = true;
 		gameCanvas.enable();
-		this.x = -1000;
+		this.x = -2000;
 		gameCanvas.creation();
+		gameStarted = true;
 	}
 
 	public function createBox(x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
@@ -221,7 +221,7 @@ class Main extends Sprite
 				//screen movement
 				if (b.x < 0)
 				{
-					this.x = this.x * 0.05;
+					this.x = this.x * 0.9999;
 				}
 				else if (b.x > 3000 && gameCanvas.fired == true )
 				{
@@ -241,7 +241,7 @@ class Main extends Sprite
 				//}
 				else 
 				{
-					this.x = this.x * 0.02;
+					this.x = this.x * 0.99999;
 				}
 				
 				if ((( -b.y) + 240 > 0) && b.x > 0 && gameCanvas.fired == true )

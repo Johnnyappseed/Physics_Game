@@ -30,7 +30,7 @@ class Castle_1 extends Sprite
 	public function new() 
 	{
 		super();
-		var refX:Int = 1000;
+		var refX:Int = 2000;
 		var refY:Int = 470;
 		castleBlocks = new List<Castle_Block>();
 		
