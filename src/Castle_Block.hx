@@ -42,13 +42,13 @@ class Castle_Block extends Sprite
 		
 		block = Main.game.createBox(x, y, w, h, true, 1);
 		
-		/*create sprite
+		//create sprite
 		var blockIcon = new Bitmap(Assets.getBitmapData("img/"+blockIconName));
 		sprite = new Sprite();
 		sprite.addChild(blockIcon);
 		sprite.x = -blockIcon.width / 2;
 		sprite.y = -blockIcon.height / 2;
-		this.addChild(sprite);*/
+		this.addChild(sprite);
 		
 		//put sprite on screen
 		this.x = x;
