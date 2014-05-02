@@ -40,7 +40,7 @@ class Projectile extends Sprite
 		this.x = x;
 		this.y = y;
 		
-		//add whimsical words to ammo
+		/*add whimsical words to ammo
 		textField = new TextField();
 		textFormat = new TextFormat();
 		
@@ -53,7 +53,7 @@ class Projectile extends Sprite
 		sprite.addChild(textField);
 		
 		textField.x = 4;
-		textField.y = -14;
+		textField.y = -14;*/
 	}
 	
 	public function act()

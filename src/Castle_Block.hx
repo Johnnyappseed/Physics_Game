@@ -1,8 +1,10 @@
 package;
 import box2D.dynamics.B2Body;
 import flash.display.Sprite;
-import openfl.Assets;
 import flash.display.Bitmap;
+import flash.display.BitmapData;
+import openfl.Assets;
+import box2D.collision.shapes.B2CircleShape;
 
 /**
  * ...
@@ -42,13 +44,13 @@ class Castle_Block extends Sprite
 		
 		block = Main.game.createBox(x, y, w, h, true, 1);
 		
-		/*create sprite
+		//create sprite
 		var blockIcon = new Bitmap(Assets.getBitmapData("img/"+blockIconName));
 		sprite = new Sprite();
 		sprite.addChild(blockIcon);
 		sprite.x = -blockIcon.width / 2;
 		sprite.y = -blockIcon.height / 2;
-		this.addChild(sprite);*/
+		this.addChild(sprite);
 		
 		//put sprite on screen
 		this.x = x;
