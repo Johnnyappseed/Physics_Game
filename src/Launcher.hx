@@ -15,6 +15,8 @@ import box2D.dynamics.B2World;
 import box2D.dynamics.joints.B2RevoluteJointDef;
 import box2D.dynamics.joints.B2RevoluteJoint;
 import box2D.dynamics.joints.B2Joint;
+import openfl.Assets;
+import flash.display.Bitmap;
 //http://www.emanueleferonato.com/2009/10/05/basic-box2d-rope/
 
 /**
@@ -23,6 +25,8 @@ import box2D.dynamics.joints.B2Joint;
  */
 class Launcher extends Sprite
 {
+	var sprite:Sprite;
+	
 	var log:B2Body;
 	var staticCircle:B2Body;
 	var wieght:B2Body;
@@ -90,7 +94,19 @@ class Launcher extends Sprite
 		//trace(Main.game.gameCanvas);
 		body = ammo.circle;
 		projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (13 * 10) + 10) * Main.PHYSICS_SCALE, (y + 141) * Main.PHYSICS_SCALE));
-		projectileJoint=Main.World.createJoint(projectileJointDef);
+		projectileJoint = Main.World.createJoint(projectileJointDef);
+		
+		//add sprite to log
+		var logIcon = new Bitmap(Assets.getBitmapData("img/logIcon.png"));
+		sprite = new Sprite();
+		sprite.addChild(logIcon);
+		sprite.x = -logIcon.width / 2; 
+		sprite.y = -logIcon.height / 2;
+		this.addChild(sprite);
+		
+		//put sprite on screen
+		this.x = x;
+		this.y = y;
 	}
 	public function increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents()
 	{
@@ -119,6 +135,13 @@ class Launcher extends Sprite
 		Main.World.destroyBody(log);
 		Main.World.destroyBody(staticCircle);
 		
+	}
+	
+	public function act() 
+	{
+		this.x = log.getPosition().x / Main.PHYSICS_SCALE;
+		this.y = log.getPosition().y / Main.PHYSICS_SCALE;
+		this.rotation = log.getAngle() * 180.0 / Math.PI;
 	}
 	
 	

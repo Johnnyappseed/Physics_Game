@@ -127,6 +127,7 @@ class Game_Canvas extends Sprite
 	{
 		for (a in ammoBelt) a.act();
 		for (b in castle.castleBlocks) b.act();
+		catapult.act();
 	}
 	
 	public function disable()
