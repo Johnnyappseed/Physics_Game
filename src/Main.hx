@@ -93,10 +93,10 @@ class Main extends Sprite
 	public function startGame(e) 
 	{
 		this.removeChild(startMenu);
-		gameStarted = true;
 		gameCanvas.enable();
 		this.x = -1000;
 		gameCanvas.creation();
+		gameStarted = true;
 	}
 
 	public function createBox(x:Float, y:Float, width:Float, height:Float, dynamicBody:Bool, density:Float):B2Body
