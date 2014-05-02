@@ -70,10 +70,7 @@ class Main extends Sprite
 		this.addChild(gameCanvas);
 		
 		//create+add start menu and buttons
-		startMenu = createMenu("startMenuIcon.png");
-		this.addChild(startMenu);
-		playButton = createButtonAt(300, 300, "playButtonIcon.png", startMenu);
-		
+		loadStartMenu();
 		
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
@@ -84,14 +81,29 @@ class Main extends Sprite
 		World.setDebugDraw(debugDraw);
 		
 		//event listeners
-		playButton.addEventListener(MouseEvent.CLICK, startGame);
 		addEventListener (Event.ENTER_FRAME, this_onEnterFrame);
 	}
 
 	/* SETUP */
 	
+	public function clearWorld()
+	{
+		gameCanvas.destroyAmmo();
+		gameCanvas.catapultReset();
+		gameCanvas.castle.destroy();
+	}
+	
+	public function loadStartMenu()
+	{
+		startMenu = createMenu("startMenuIcon.png");
+		this.addChild(startMenu);
+		playButton = createButtonAt(300, 300, "playButtonIcon.png", startMenu);
+		playButton.addEventListener(MouseEvent.CLICK, startGame);
+	}
+	
 	public function startGame(e) 
 	{
+		playButton.removeEventListener(MouseEvent.CLICK, startGame);
 		this.removeChild(startMenu);
 		gameCanvas.enable();
 		this.x = -2000;
@@ -254,6 +266,13 @@ class Main extends Sprite
 					this.y = this.y * 0.05;
 				}
 			}
+		}
+		if (gameCanvas.gg == true)
+		{
+			this.x = 0;
+			loadStartMenu();
+			clearWorld();
+			gameCanvas.gg = false;
 		}
 	}
 	

@@ -37,8 +37,8 @@ class Launcher extends Sprite
 	var projectileJointDef:B2RevoluteJointDef;
 	var projectileJoint:B2Joint;
 	
-	var ropeLinks:Array<B2Body>;
-	var ropeJoints:Array<B2Joint>;
+	var ropeLinks:List<B2Body>;
+	var ropeJoints:List<B2Joint>;
 	
 	var joint:B2Vec2; 
 	var LOG_X:Int;
@@ -58,10 +58,11 @@ class Launcher extends Sprite
 		//make it to where when you press play that it starts up the launcher and whatnot
 		ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300 + 141);
 		Main.game.gameCanvas.ammoBelt.push(ammo);
+		trace(Main.game.gameCanvas.ammoBelt);
 		Main.game.gameCanvas.addChild(ammo);
 		
-		ropeLinks = new Array();
-		ropeJoints = new Array();
+		ropeLinks = new List<B2Body>();
+		ropeJoints = new List<B2Joint>();
 		//center point 
 		staticCircle = Main.game.createCircle(x, y, 15, false);
 		//log and angle
@@ -83,8 +84,8 @@ class Launcher extends Sprite
 			ropeJointsDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - 141 + (i * 10) - 10)*Main.PHYSICS_SCALE,(y+141)*Main.PHYSICS_SCALE));
 			ropeJoint = Main.World.createJoint(ropeJointsDef);
 			link = body;
-			ropeLinks.push(link);
-			ropeJoints.push(ropeJoint);
+			ropeLinks.add(link);
+			ropeJoints.add(ropeJoint);
 		}
 		//add ammo and link to rope
 		//trace(Main.game.gameCanvas);
@@ -111,7 +112,6 @@ class Launcher extends Sprite
 		}
 		for (i in ropeLinks)
 		{
-			trace(i);
 			ropeLinks.remove(i);
 			Main.World.destroyBody(i);
 		}
