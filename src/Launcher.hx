@@ -52,11 +52,11 @@ class Launcher extends Sprite
 	public function new(x:Int, y:Int) 
 	{
 		super();
-		trace(Main.game.gameCanvas);
+		//trace(Main.game.gameCanvas);
 		//make it to where when you press play that it starts up the launcher and whatnot
 		ammo = new Projectile(400 - 141 + (13 * 10) + 10, 300 + 141);
 		Main.game.gameCanvas.ammoBelt.push(ammo);
-		trace(Main.game.gameCanvas.ammoBelt);
+		//trace(Main.game.gameCanvas.ammoBelt);
 		Main.game.gameCanvas.addChild(ammo);
 		
 		ropeLinks = new List<B2Body>();

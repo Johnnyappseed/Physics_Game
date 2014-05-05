@@ -20,7 +20,7 @@ class EvilGuy extends Sprite
 	{
 		super();
 		
-		w = 30;
+		w = 30; 
 		h = 30;
 		if (type == 1) evilGuyIconName = "aliveEvilGuyIcon.png";
 		else evilGuyIconName = "deadEvilGuyIcon.png";

@@ -29,6 +29,7 @@ import motion.Actuate;
 class Main extends Sprite 
 {
 	//miscellaneous
+	
 	var inited:Bool;
 	public static var game;
 	public static var PHYSICS_SCALE:Float = 1.0 / 30;
