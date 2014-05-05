@@ -76,7 +76,7 @@ class Main extends Sprite
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
 		debugDraw.setDrawScale (1 / PHYSICS_SCALE);
-		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_aabbBit + B2DebugDraw.e_shapeBit);// + B2DebugDraw.e_aabbBit);
+		debugDraw.setFlags (B2DebugDraw.e_shapeBit);// + B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_aabbBit);// + B2DebugDraw.e_aabbBit);
 		
 		//shows fancy physics objects (remove before game is finished)
 		World.setDebugDraw(debugDraw);
