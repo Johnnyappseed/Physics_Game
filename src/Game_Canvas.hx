@@ -106,7 +106,7 @@ class Game_Canvas extends Sprite
 			else 
 			{
 				catapultDestroy();
-				catapult = new Launcher(400, 300);
+				catapult = new Launcher(400, 350);
 				this.addChild(catapult);
 				fired = false;
 				lookingAtLauncher = true;
@@ -137,7 +137,7 @@ class Game_Canvas extends Sprite
 	
 	public function creation()
 	{
-		catapult = new Launcher(400, 300);
+		catapult = new Launcher(400, 350);
 		this.addChild(catapult);
 		destroyAmmo();
 		castle = new Castle_1();
