@@ -20,7 +20,6 @@ class Game_Canvas extends Sprite
 	//projectiles
 	public var catapult:Launcher;
 	public var grass:B2Body;
-	public var enemy:EvilGuy;
 	
 	//castle blocks
 	public var topBlock:Castle_Block;
@@ -149,7 +148,6 @@ class Game_Canvas extends Sprite
 	{
 		for (a in ammoBelt) a.act();
 		castle.act();
-		enemy.act();
 		if (castle.enemies.length == 0)
 		{
 			gg = true;
