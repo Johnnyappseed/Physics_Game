@@ -36,8 +36,8 @@ class EvilGuy extends Sprite
 		this.addChild(sprite);
 		
 		//put sprite on screen
-		this.x = x / Main.PHYSICS_SCALE;
-		this.y = y / Main.PHYSICS_SCALE;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public function act()
