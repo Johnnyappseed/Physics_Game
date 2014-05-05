@@ -20,6 +20,8 @@ import openfl.Assets;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import motion.Actuate;
+import flash.media.Sound;
+import flash.media.SoundChannel;
 
 /**
  * ...
@@ -44,6 +46,11 @@ class Main extends Sprite
 	var startMenu:Sprite;
 	var playButton:Sprite;
 	
+	//sound
+	var bgmusic:Sound;
+	var jumpmusic:Sound;
+	var sc:SoundChannel;
+	
 	//screen positioning var'sss
 	var xv:Float;
 	var yv:Float;
@@ -65,6 +72,10 @@ class Main extends Sprite
 		PhysicsDebug = new Sprite ();
 		xv = 0.0;
 		yv = 0.0;
+		
+		//music
+		bgmusic = Assets.getSound("sound/bgmusic.wav");
+		bgmusic.play(0,9999999);
 		
 		addChild (PhysicsDebug);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
