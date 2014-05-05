@@ -33,7 +33,7 @@ class Game_Canvas extends Sprite
 	public var launching:Bool;
 	public var fired:Bool;
 	
-	public var ammoBelt:Array<Projectile>;
+	public var ammoBelt:List<Projectile>;
 	public var ammo:Projectile;
 	
 	public var castle:Castle_1;
@@ -51,10 +51,10 @@ class Game_Canvas extends Sprite
 		gg = false;
 		
 		//initialize things
-		ammoBelt = new Array();
+		ammoBelt = new List<Projectile>();
 		
 		//create grass
-		grass = Main.game.createBox(600, 480, 6000, 7, false, 1.0);
+		grass = Main.game.createBox(600, 480, 6000, 10, false, 1.0);
 		
 		//create sprite for grass
 		var grassIcon = new Bitmap(Assets.getBitmapData("img/grassIcon.png"));
@@ -105,7 +105,7 @@ class Game_Canvas extends Sprite
 			}
 			else 
 			{
-				catapultReset();
+				catapultDestroy();
 				catapult = new Launcher(400, 300);
 				this.addChild(catapult);
 				fired = false;
@@ -129,7 +129,7 @@ class Game_Canvas extends Sprite
 		return false;
 	}
 	
-	public function catapultReset()
+	public function catapultDestroy()
 	{
 		catapult.destroy();
 		this.removeChild(catapult);
@@ -139,10 +139,9 @@ class Game_Canvas extends Sprite
 	{
 		catapult = new Launcher(400, 300);
 		this.addChild(catapult);
-		var a:Projectile = ammoBelt.pop();
-		this.removeChild(a);
-		Main.World.destroyBody(a.circle);
+		destroyAmmo();
 		castle = new Castle_1();
+		this.addChild(castle);
 	}
 	
 	public function act()

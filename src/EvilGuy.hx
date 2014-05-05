@@ -28,7 +28,9 @@ class EvilGuy extends Sprite
 		block = Main.game.createBox(x, y, w, h, true, 1.0);
 		
 		//create sprite
-		var evilGuyIcon = new Bitmap(Assets.getBitmapData("img/"+evilGuyIconName));
+		var evilGuyIcon = new Bitmap(Assets.getBitmapData("img/" + evilGuyIconName));
+		evilGuyIcon.width = 30;
+		evilGuyIcon.height = 30;
 		sprite = new Sprite();
 		sprite.addChild(evilGuyIcon);
 		sprite.x = -evilGuyIcon.width / 2;
@@ -36,8 +38,8 @@ class EvilGuy extends Sprite
 		this.addChild(sprite);
 		
 		//put sprite on screen
-		this.x = x / Main.PHYSICS_SCALE;
-		this.y = y / Main.PHYSICS_SCALE;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public function act()
