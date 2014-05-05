@@ -1,8 +1,10 @@
 package;
 import box2D.dynamics.B2Body;
 import flash.display.Sprite;
-import openfl.Assets;
 import flash.display.Bitmap;
+import flash.display.BitmapData;
+import openfl.Assets;
+import box2D.collision.shapes.B2CircleShape;
 
 /**
  * ...

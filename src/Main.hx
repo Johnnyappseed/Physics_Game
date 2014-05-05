@@ -75,7 +75,7 @@ class Main extends Sprite
 		var debugDraw = new B2DebugDraw ();
 		debugDraw.setSprite (PhysicsDebug);
 		debugDraw.setDrawScale (1 / PHYSICS_SCALE);
-		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_aabbBit + B2DebugDraw.e_shapeBit );// + B2DebugDraw.e_aabbBit);
+		debugDraw.setFlags (B2DebugDraw.e_centerOfMassBit + B2DebugDraw.e_aabbBit + B2DebugDraw.e_shapeBit);// + B2DebugDraw.e_aabbBit);
 		
 		//shows fancy physics objects (remove before game is finished)
 		World.setDebugDraw(debugDraw);
@@ -89,25 +89,30 @@ class Main extends Sprite
 	public function clearWorld()
 	{
 		gameCanvas.destroyAmmo();
-		gameCanvas.catapultReset();
+		gameCanvas.catapultDestroy();
 		gameCanvas.castle.destroy();
+		gameCanvas.removeChild(gameCanvas.castle);
+		gameCanvas.lookingAtLauncher = false;
+		gameCanvas.fired = false;
+		gameCanvas.launching = false;
+		gameCanvas.disable();
 	}
 	
 	public function loadStartMenu()
 	{
 		startMenu = createMenu("startMenuIcon.png");
-		this.addChild(startMenu);
 		playButton = createButtonAt(300, 300, "playButtonIcon.png", startMenu);
+		this.addChild(startMenu);
 		playButton.addEventListener(MouseEvent.CLICK, startGame);
 	}
 	
 	public function startGame(e) 
 	{
+		gameCanvas.enable();
+		gameCanvas.creation();
+		this.x = -gameCanvas.castle.avgX+400;
 		playButton.removeEventListener(MouseEvent.CLICK, startGame);
 		this.removeChild(startMenu);
-		gameCanvas.enable();
-		this.x = -2000;
-		gameCanvas.creation();
 		gameStarted = true;
 	}
 
@@ -227,18 +232,18 @@ class Main extends Sprite
 		if (gameStarted) 
 		{
 			gameCanvas.act();
-			if (gameCanvas.ammoBelt.length > 0)
+			if (gameCanvas.ammoBelt.isEmpty() == false)
 			{
-				var b:Projectile = gameCanvas.ammoBelt[gameCanvas.ammoBelt.length-1];
+				var b:Projectile = gameCanvas.ammoBelt.first();
 				//screen movement
 				if (b.x < 0)
 				{
-					this.x = this.x * 0.9999;
+					this.x = this.x * 0.99999;
 				}
 				else if (b.x > 3000 && gameCanvas.fired == true )
 				{
 					//xv value should be the average position of all the castle blocks plus/minus half the screen
-					xv = 0;
+					xv = gameCanvas.castle.avgX;
 					this.x = xv * 0.1;
 				}
 				else if (gameCanvas.fired)
@@ -256,23 +261,24 @@ class Main extends Sprite
 					this.x = this.x * 0.99999;
 				}
 				
-				if ((( -b.y) + 240 > 0) && b.x > 0 && gameCanvas.fired == true )
+				if ((( -b.y) + 240 > 0) && b.x > 0 && gameCanvas.fired == true && b.x < 3000)
 				{
 					yv = (-b.y)+240 - (this.y);
-					this.y += yv * 0.5;
+					this.y += yv * 0.1;
 				}
 				else 
 				{
-					this.y = this.y * 0.05;
+					this.y = this.y * 0.9;
 				}
 			}
-		}
-		if (gameCanvas.gg == true)
-		{
-			this.x = 0;
-			loadStartMenu();
-			clearWorld();
-			gameCanvas.gg = false;
+			if (gameCanvas.gg == true)
+			{
+				this.x = 0;
+				clearWorld();
+				loadStartMenu();
+				gameCanvas.gg = false;
+				gameStarted = false;
+			}
 		}
 	}
 	
