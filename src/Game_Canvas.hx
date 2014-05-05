@@ -20,6 +20,7 @@ class Game_Canvas extends Sprite
 	//projectiles
 	public var catapult:Launcher;
 	public var grass:B2Body;
+	public var enemy:EvilGuy;
 	
 	//castle blocks
 	public var topBlock:Castle_Block;
@@ -33,7 +34,7 @@ class Game_Canvas extends Sprite
 	public var launching:Bool;
 	public var fired:Bool;
 	
-	public var ammoBelt:Array<Projectile>;
+	public var ammoBelt:List<Projectile>;
 	public var ammo:Projectile;
 	
 	public var castle:Castle_1;
@@ -51,10 +52,10 @@ class Game_Canvas extends Sprite
 		gg = false;
 		
 		//initialize things
-		ammoBelt = new Array();
+		ammoBelt = new List<Projectile>();
 		
 		//create grass
-		grass = Main.game.createBox(600, 480, 6000, 7, false, 1.0);
+		grass = Main.game.createBox(600, 480, 6000, 10, false, 1.0);
 		
 		//create sprite for grass
 		var grassIcon = new Bitmap(Assets.getBitmapData("img/grassIcon.png"));
@@ -105,8 +106,8 @@ class Game_Canvas extends Sprite
 			}
 			else 
 			{
-				catapultReset();
-				catapult = new Launcher(400, 300);
+				catapultDestroy();
+				catapult = new Launcher(400, 350);
 				this.addChild(catapult);
 				fired = false;
 				lookingAtLauncher = true;
@@ -129,7 +130,7 @@ class Game_Canvas extends Sprite
 		return false;
 	}
 	
-	public function catapultReset()
+	public function catapultDestroy()
 	{
 		catapult.destroy();
 		this.removeChild(catapult);
@@ -137,18 +138,18 @@ class Game_Canvas extends Sprite
 	
 	public function creation()
 	{
-		catapult = new Launcher(400, 300);
+		catapult = new Launcher(400, 350);
 		this.addChild(catapult);
-		var a:Projectile = ammoBelt.pop();
-		this.removeChild(a);
-		Main.World.destroyBody(a.circle);
+		destroyAmmo();
 		castle = new Castle_1();
+		this.addChild(castle);
 	}
 	
 	public function act()
 	{
 		for (a in ammoBelt) a.act();
 		castle.act();
+		enemy.act();
 		if (castle.enemies.length == 0)
 		{
 			gg = true;

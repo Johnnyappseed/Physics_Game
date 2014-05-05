@@ -21,12 +21,13 @@ class Projectile extends Sprite
 	var textField:TextField;
 	var textFormat:TextFormat;
 	
-	public function new(x:Int, y:Int) 
+	public function new(x:Float, y:Float) 
 	{
 		super();
 		
 		//create dynamic circle
-		circle = Main.game.createCircle(x, y, 12, true);
+		circle = Main.game.createCircle(Std.int(x), Std.int(y), 12, true);
+		circle.setAngle(0);
 		
 		//create sprite
 		var projectileIcon = new Bitmap(Assets.getBitmapData("img/projectileIcon.png"));
