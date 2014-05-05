@@ -239,27 +239,27 @@ class Main extends Sprite
 				//screen movement
 				if (b.x < 0)
 				{
-					this.x = this.x * 0.99999;
+					this.x = this.x * 0.95;
 				}
 				else if (b.x > 3000 && gameCanvas.fired == true )
 				{
 					//xv value should be the average position of all the castle blocks plus/minus half the screen
-					xv = gameCanvas.castle.avgX;
-					this.x = xv * 0.1;
+					xv = (-gameCanvas.castle.avgX+400) - this.x;
+					this.x += xv * 0.1;
 				}
+				//else if (b.circle.get)
+				//{
+					//
+				//}
 				else if (gameCanvas.fired)
 				{
 					xv = (-b.x)+400 - (this.x);
 					this.x += xv * 0.1;
 				}
 				//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
-				//else if ()
-				//{
-				//	
-				//}
 				else 
 				{
-					this.x = this.x * 0.99999;
+					this.x = this.x * 0.95;
 				}
 				
 				if ((( -b.y) + 240 > 0) && b.x > 0 && gameCanvas.fired == true && b.x < 3000)
@@ -269,12 +269,13 @@ class Main extends Sprite
 				}
 				else 
 				{
-					this.y = this.y * 0.9;
+					this.y = this.y * 0.89;
 				}
 			}
 			if (gameCanvas.gg == true)
 			{
 				this.x = 0;
+				this.y = 0;
 				clearWorld();
 				loadStartMenu();
 				gameCanvas.gg = false;
