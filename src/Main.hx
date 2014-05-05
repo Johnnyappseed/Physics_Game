@@ -1,5 +1,6 @@
 package ;
 
+import box2D.dynamics.contacts.B2ContactEdge;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
@@ -36,6 +37,7 @@ class Main extends Sprite
 	private var PhysicsDebug:Sprite;
 	public static var World:B2World;
 	var gameStarted:Bool = false;
+	public static var contactContacted:Bool = false;
 	
 	//game canvas, menus, buttons, etc.
 	public var gameCanvas:Game_Canvas;
@@ -236,6 +238,14 @@ class Main extends Sprite
 			if (gameCanvas.ammoBelt.isEmpty() == false)
 			{
 				var b:Projectile = gameCanvas.ammoBelt.first();
+				for (blk in gameCanvas.castle.castleBlocks)
+				{
+					var contacts:B2ContactEdge = blk.block.getContactList();
+					if (contacts.other == b.circle)
+					{
+						contactContacted = true;
+					}
+				}
 				//screen movement
 				if (b.x < 0)
 				{
@@ -247,10 +257,11 @@ class Main extends Sprite
 					xv = (-gameCanvas.castle.avgX+400) - this.x;
 					this.x += xv * 0.1;
 				}
-				//else if (b.circle.get)
-				//{
-					//
-				//}
+				else if (gameCanvas.fired == true && contactContacted == true)
+				{
+					xv = (-gameCanvas.castle.avgX+400) - this.x;
+					this.x += xv * 0.01;
+				}
 				else if (gameCanvas.fired)
 				{
 					xv = (-b.x)+400 - (this.x);

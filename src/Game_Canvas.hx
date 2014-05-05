@@ -106,6 +106,7 @@ class Game_Canvas extends Sprite
 			else 
 			{
 				catapultDestroy();
+				Main.contactContacted = false;
 				catapult = new Launcher(400, 350);
 				this.addChild(catapult);
 				fired = false;
