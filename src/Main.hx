@@ -171,7 +171,7 @@ class Main extends Sprite
 		body.createFixture (fixtureDefinition);
 		return body;
 	}
-	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):B2Body 
+	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool, density:Float):B2Body 
 	{
 		//create body definition
 		var bodyDefinition = new B2BodyDef ();
@@ -181,7 +181,7 @@ class Main extends Sprite
 		//create fixture definition
 		var fixtureDefinition = new B2FixtureDef ();
 		fixtureDefinition.shape = new B2CircleShape (radius * PHYSICS_SCALE);
-		fixtureDefinition.density = 1;
+		fixtureDefinition.density = density;
 		fixtureDefinition.friction = 1;
 		
 		//put fixture+body def into a body that can be returned
@@ -252,9 +252,12 @@ class Main extends Sprite
 				for (blk in gameCanvas.castle.castleBlocks)
 				{
 					var contacts:B2ContactEdge = blk.block.getContactList();
-					if (contacts.other == b.circle)
+					if (contacts.other != null)
 					{
-						contactContacted = true;
+						if (contacts.other == b.circle)
+						{
+							contactContacted = true;
+						}
 					}
 				}
 				//screen movement
@@ -303,6 +306,8 @@ class Main extends Sprite
 				gameCanvas.gg = false;
 				gameStarted = false;
 			}
+			gameCanvas.treeSprite.x = -this.x * 0.4;
+			gameCanvas.cloudSprite.x = -this.x * 0.8;
 		}
 	}
 	

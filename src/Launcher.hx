@@ -60,7 +60,7 @@ class Launcher extends Sprite
 		ropeLinks = new List<B2Body>();
 		ropeJoints = new List<B2Joint>();
 		//center point 
-		staticCircle = Main.game.createCircle(x, y, 10, false);
+		staticCircle = Main.game.createCircle(x, y, 10, false, 10);
 		//log and angle
 		log = Main.game.createBox( x - Math.sqrt((((logWidth * (2 / 3)) - (logWidth / 2))*((logWidth * (2 / 3)) - (logWidth / 2))) / 2), y + Math.sqrt((((logWidth * (2 / 3)) - (logWidth / 2))*((logWidth * (2 / 3)) - (logWidth / 2))) / 2), logWidth, 20, false, 1.0);
 		log.setAngle( -0.7853981633974483);
@@ -68,7 +68,7 @@ class Launcher extends Sprite
 		logJointDef = Main.game.revoluteJointFunction(staticCircle, log, staticCircle.getWorldCenter());
 		logJoint = Main.World.createJoint(logJointDef);
 		//wieght, jointed to log
-		wieght = Main.game.createBox(x + Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2), y + 35/2, 40, 35, true, 30.0);
+		wieght = Main.game.createBox(x + Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2), y + 35/2, 35, 35, true, 55.0);
 		joint = new B2Vec2((x+Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2)) * Main.PHYSICS_SCALE,(y-Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2)) * Main.PHYSICS_SCALE);
 		wieghtJointDef = Main.game.revoluteJointFunction(log, wieght, joint);
 		wieghtJoint = Main.World.createJoint(wieghtJointDef);

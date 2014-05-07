@@ -12,6 +12,7 @@ class EvilGuy extends Sprite
 {
 	public var block:B2Body;
 	var evilGuyIconName:String;
+	var evilGuyIcon:Bitmap;
 	var sprite:Sprite;
 	var h:Int;
 	var w:Int;
@@ -20,17 +21,15 @@ class EvilGuy extends Sprite
 	{
 		super();
 		
-		w = 30; 
-		h = 30;
 		if (type == 1) evilGuyIconName = "aliveEvilGuyIcon.png";
 		else evilGuyIconName = "deadEvilGuyIcon.png";
 		
-		block = Main.game.createBox(x, y, w, h, true, 1.0);
+		block = Main.game.createCircle(x, y, 20, true, 1);
 		
 		//create sprite
-		var evilGuyIcon = new Bitmap(Assets.getBitmapData("img/" + evilGuyIconName));
-		evilGuyIcon.width = 30;
-		evilGuyIcon.height = 30;
+		evilGuyIcon = new Bitmap(Assets.getBitmapData("img/" + evilGuyIconName));
+		evilGuyIcon.width = 40;
+		evilGuyIcon.height = 40;
 		sprite = new Sprite();
 		sprite.addChild(evilGuyIcon);
 		sprite.x = -evilGuyIcon.width / 2;
@@ -40,6 +39,17 @@ class EvilGuy extends Sprite
 		//put sprite on screen
 		this.x = x;
 		this.y = y;
+	}
+	
+	public function iHaveBeenHitJimmyAndItBurnsLikeTheDickens()
+	{
+		evilGuyIconName = "deadEvilGuyIcon.png";
+		sprite.addChild(evilGuyIcon);
+		evilGuyIcon = new Bitmap(Assets.getBitmapData("img/" + evilGuyIconName));
+		evilGuyIcon.width = 40;
+		evilGuyIcon.height = 40;
+		sprite.addChild(evilGuyIcon);
+		
 	}
 	
 	public function act()

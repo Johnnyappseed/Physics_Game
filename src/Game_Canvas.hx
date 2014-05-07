@@ -17,9 +17,11 @@ import motion.Actuate;
 class Game_Canvas extends Sprite
 {
 	
-	//projectiles
 	public var catapult:Launcher;
+	
 	public var grass:B2Body;
+	public var treeSprite:Sprite;
+	public var cloudSprite:Sprite;
 	
 	//castle blocks
 	public var topBlock:Castle_Block;
@@ -58,7 +60,7 @@ class Game_Canvas extends Sprite
 		
 		//create sprite for trees background
 		var treeIcon = new Bitmap(Assets.getBitmapData("img/treeStripIcon.png"));
-		var treeSprite = new Sprite();
+		treeSprite = new Sprite();
 		treeSprite.addChild(treeIcon);
 		treeSprite.x = -treeIcon.width / 2;
 		treeSprite.y = -treeIcon.height / 2;
@@ -72,7 +74,7 @@ class Game_Canvas extends Sprite
 		var grassIcon = new Bitmap(Assets.getBitmapData("img/grassIcon.png"));
 		var grassSprite = new Sprite();
 		grassSprite.addChild(grassIcon);
-		grassSprite.x = -grassIcon.width / 2;
+		grassSprite.x = (-grassIcon.width / 2);
 		grassSprite.y = -grassIcon.height / 2;
 		this.addChild(grassSprite);
 		
@@ -82,7 +84,7 @@ class Game_Canvas extends Sprite
 		
 		//create sprite for cloud background
 		var cloudIcon = new Bitmap(Assets.getBitmapData("img/cloudIcon.png"));
-		var cloudSprite = new Sprite();
+		cloudSprite = new Sprite();
 		cloudSprite.addChild(cloudIcon);
 		cloudSprite.x = -cloudIcon.width / 2;
 		cloudSprite.y = -cloudIcon.height / 2;
