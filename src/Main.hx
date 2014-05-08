@@ -252,11 +252,14 @@ class Main extends Sprite
 				for (blk in gameCanvas.castle.castleBlocks)
 				{
 					var contacts:B2ContactEdge = blk.block.getContactList();
-					if (contacts.other != null)
+					if (contacts != null)
 					{
-						if (contacts.other == b.circle)
+						if (contacts.other != null)
 						{
-							contactContacted = true;
+							if (contacts.other == b.circle)
+							{
+								contactContacted = true;
+							}
 						}
 					}
 				}
