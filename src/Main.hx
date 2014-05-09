@@ -1,5 +1,6 @@
 package ;
 
+import box2D.dynamics.contacts.B2ContactEdge;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
@@ -19,6 +20,8 @@ import openfl.Assets;
 import flash.events.Event;
 import flash.events.MouseEvent;
 import motion.Actuate;
+import flash.media.Sound;
+import flash.media.SoundChannel;
 
 /**
  * ...
@@ -29,17 +32,24 @@ import motion.Actuate;
 class Main extends Sprite 
 {
 	//miscellaneous
+	
 	var inited:Bool;
 	public static var game;
 	public static var PHYSICS_SCALE:Float = 1.0 / 30;
 	private var PhysicsDebug:Sprite;
 	public static var World:B2World;
 	var gameStarted:Bool = false;
+	public static var contactContacted:Bool = false;
 	
 	//game canvas, menus, buttons, etc.
 	public var gameCanvas:Game_Canvas;
 	var startMenu:Sprite;
 	var playButton:Sprite;
+	
+	//sound
+	var bgmusic:Sound;
+	var jumpmusic:Sound;
+	var sc:SoundChannel;
 	
 	//screen positioning var'sss
 	var xv:Float;
@@ -62,6 +72,10 @@ class Main extends Sprite
 		PhysicsDebug = new Sprite ();
 		xv = 0.0;
 		yv = 0.0;
+		
+		//music
+		bgmusic = Assets.getSound("sound/bgmusic.wav");
+		bgmusic.play(0,9999999);
 		
 		addChild (PhysicsDebug);
 		World = new B2World(new B2Vec2 (0, 10.0), true);
@@ -157,7 +171,7 @@ class Main extends Sprite
 		body.createFixture (fixtureDefinition);
 		return body;
 	}
-	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool):B2Body 
+	public function createCircle (x:Float, y:Float, radius:Float, dynamicBody:Bool, density:Float):B2Body 
 	{
 		//create body definition
 		var bodyDefinition = new B2BodyDef ();
@@ -167,7 +181,7 @@ class Main extends Sprite
 		//create fixture definition
 		var fixtureDefinition = new B2FixtureDef ();
 		fixtureDefinition.shape = new B2CircleShape (radius * PHYSICS_SCALE);
-		fixtureDefinition.density = 1;
+		fixtureDefinition.density = density;
 		fixtureDefinition.friction = 1;
 		
 		//put fixture+body def into a body that can be returned
@@ -235,16 +249,35 @@ class Main extends Sprite
 			if (gameCanvas.ammoBelt.isEmpty() == false)
 			{
 				var b:Projectile = gameCanvas.ammoBelt.first();
+				for (blk in gameCanvas.castle.castleBlocks)
+				{
+					var contacts:B2ContactEdge = blk.block.getContactList();
+					if (contacts != null)
+					{
+						if (contacts.other != null)
+						{
+							if (contacts.other == b.circle)
+							{
+								contactContacted = true;
+							}
+						}
+					}
+				}
 				//screen movement
 				if (b.x < 0)
 				{
-					this.x = this.x * 0.99999;
+					this.x = this.x * 0.95;
 				}
 				else if (b.x > 3000 && gameCanvas.fired == true )
 				{
 					//xv value should be the average position of all the castle blocks plus/minus half the screen
-					xv = gameCanvas.castle.avgX;
-					this.x = xv * 0.1;
+					xv = (-gameCanvas.castle.avgX+400) - this.x;
+					this.x += xv * 0.1;
+				}
+				else if (gameCanvas.fired == true && contactContacted == true)
+				{
+					xv = (-gameCanvas.castle.avgX+400) - this.x;
+					this.x += xv * 0.01;
 				}
 				else if (gameCanvas.fired)
 				{
@@ -252,13 +285,9 @@ class Main extends Sprite
 					this.x += xv * 0.1;
 				}
 				//when the ammo collides witht he blocks the focus of x should be the average of all the castle blocks
-				//else if ()
-				//{
-				//	
-				//}
 				else 
 				{
-					this.x = this.x * 0.99999;
+					this.x = this.x * 0.95;
 				}
 				
 				if ((( -b.y) + 240 > 0) && b.x > 0 && gameCanvas.fired == true && b.x < 3000)
@@ -268,17 +297,20 @@ class Main extends Sprite
 				}
 				else 
 				{
-					this.y = this.y * 0.9;
+					this.y = this.y * 0.89;
 				}
 			}
 			if (gameCanvas.gg == true)
 			{
 				this.x = 0;
+				this.y = 0;
 				clearWorld();
 				loadStartMenu();
 				gameCanvas.gg = false;
 				gameStarted = false;
 			}
+			gameCanvas.treeSprite.x = -this.x * 0.4;
+			gameCanvas.cloudSprite.x = -this.x * 0.8;
 		}
 	}
 	

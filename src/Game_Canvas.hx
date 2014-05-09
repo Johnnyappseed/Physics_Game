@@ -17,9 +17,11 @@ import motion.Actuate;
 class Game_Canvas extends Sprite
 {
 	
-	//projectiles
 	public var catapult:Launcher;
+	
 	public var grass:B2Body;
+	public var treeSprite:Sprite;
+	public var cloudSprite:Sprite;
 	
 	//castle blocks
 	public var topBlock:Castle_Block;
@@ -56,17 +58,41 @@ class Game_Canvas extends Sprite
 		//create grass
 		grass = Main.game.createBox(600, 480, 6000, 10, false, 1.0);
 		
+		//create sprite for trees background
+		var treeIcon = new Bitmap(Assets.getBitmapData("img/treeStripIcon.png"));
+		treeSprite = new Sprite();
+		treeSprite.addChild(treeIcon);
+		treeSprite.x = -treeIcon.width / 2;
+		treeSprite.y = -treeIcon.height / 2;
+		this.addChild(treeSprite);
+		
+		//put trees sprite on screen
+		treeSprite.x = -500;
+		treeSprite.y = 250;
+		
 		//create sprite for grass
 		var grassIcon = new Bitmap(Assets.getBitmapData("img/grassIcon.png"));
 		var grassSprite = new Sprite();
 		grassSprite.addChild(grassIcon);
-		grassSprite.x = -grassIcon.width / 2;
+		grassSprite.x = (-grassIcon.width / 2);
 		grassSprite.y = -grassIcon.height / 2;
 		this.addChild(grassSprite);
 		
 		//put grass sprite on screen
-		grassSprite.x = 0;
+		grassSprite.x = -500;
 		grassSprite.y = 472;
+		
+		//create sprite for cloud background
+		var cloudIcon = new Bitmap(Assets.getBitmapData("img/cloudIcon.png"));
+		cloudSprite = new Sprite();
+		cloudSprite.addChild(cloudIcon);
+		cloudSprite.x = -cloudIcon.width / 2;
+		cloudSprite.y = -cloudIcon.height / 2;
+		this.addChild(cloudSprite);
+		
+		//put cloud sprite on screen
+		cloudSprite.x = -500;
+		cloudSprite.y = -100;
 	}
 	
 	public function destroyAmmo()
@@ -106,6 +132,7 @@ class Game_Canvas extends Sprite
 			else 
 			{
 				catapultDestroy();
+				Main.contactContacted = false;
 				catapult = new Launcher(400, 350);
 				this.addChild(catapult);
 				fired = false;

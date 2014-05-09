@@ -52,15 +52,15 @@ class Launcher extends Sprite
 	
 	public function new(x:Int, y:Int) 
 	{
-		var logWidth:Int = 200;
+		var logWidth:Int = 180;
 		super();
-		trace(Main.game.gameCanvas);
+		//trace(Main.game.gameCanvas);
 		//make it to where when you press play that it starts up the launcher and whatnot
 		
 		ropeLinks = new List<B2Body>();
 		ropeJoints = new List<B2Joint>();
 		//center point 
-		staticCircle = Main.game.createCircle(x, y, 10, false);
+		staticCircle = Main.game.createCircle(x, y, 10, false, 10);
 		//log and angle
 		log = Main.game.createBox( x - Math.sqrt((((logWidth * (2 / 3)) - (logWidth / 2))*((logWidth * (2 / 3)) - (logWidth / 2))) / 2), y + Math.sqrt((((logWidth * (2 / 3)) - (logWidth / 2))*((logWidth * (2 / 3)) - (logWidth / 2))) / 2), logWidth, 20, false, 1.0);
 		log.setAngle( -0.7853981633974483);
@@ -68,14 +68,14 @@ class Launcher extends Sprite
 		logJointDef = Main.game.revoluteJointFunction(staticCircle, log, staticCircle.getWorldCenter());
 		logJoint = Main.World.createJoint(logJointDef);
 		//wieght, jointed to log
-		wieght = Main.game.createBox(x + Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2), y + 35/2, 40, 35, true, 30.0);
+		wieght = Main.game.createBox(x + Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2), y + 35/2, 35, 35, true, 55.0);
 		joint = new B2Vec2((x+Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2)) * Main.PHYSICS_SCALE,(y-Math.sqrt((((logWidth -(logWidth * (2 / 3)))* (2/3)) * ((logWidth -(logWidth * (2 / 3)))* (2/3))) / 2)) * Main.PHYSICS_SCALE);
 		wieghtJointDef = Main.game.revoluteJointFunction(log, wieght, joint);
 		wieghtJoint = Main.World.createJoint(wieghtJointDef);
 		link = log;
 		//rope
 		var ammoLinkCount:Int = 0;
-		for (i in 0...9)
+		for (i in 0...8)
 		{
 			body = Main.game.createRope(x - Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) + (i * 10) + 5, y + Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) , 10, 5, true, 1.0, 0.2);
 			ropeJointsDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) + (i * 10) - 5)*Main.PHYSICS_SCALE,(y+Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2))*Main.PHYSICS_SCALE));

@@ -26,7 +26,7 @@ class Projectile extends Sprite
 		super();
 		
 		//create dynamic circle
-		circle = Main.game.createCircle(Std.int(x), Std.int(y), 12, true);
+		circle = Main.game.createCircle(Std.int(x), Std.int(y), 12, true,2);
 		circle.setAngle(0);
 		
 		//create sprite
