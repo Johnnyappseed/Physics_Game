@@ -52,7 +52,7 @@ class Launcher extends Sprite
 	
 	public function new(x:Int, y:Int) 
 	{
-		var logWidth:Int = 200;
+		var logWidth:Int = 180;
 		super();
 		//trace(Main.game.gameCanvas);
 		//make it to where when you press play that it starts up the launcher and whatnot
@@ -75,7 +75,7 @@ class Launcher extends Sprite
 		link = log;
 		//rope
 		var ammoLinkCount:Int = 0;
-		for (i in 0...9)
+		for (i in 0...8)
 		{
 			body = Main.game.createRope(x - Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) + (i * 10) + 5, y + Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) , 10, 5, true, 1.0, 0.2);
 			ropeJointsDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) + (i * 10) - 5)*Main.PHYSICS_SCALE,(y+Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2))*Main.PHYSICS_SCALE));
