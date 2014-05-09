@@ -26,7 +26,9 @@ import flash.display.Bitmap;
  */
 class Launcher extends Sprite
 {
-	var sprite:Sprite;
+	var logSprite:Sprite;
+	var weightSprite:Sprite;
+	var ropeSprite:Sprite;
 	
 	var log:B2Body;
 	var staticCircle:B2Body;
@@ -97,15 +99,27 @@ class Launcher extends Sprite
 		//add sprite to log
 		var logIcon = new Bitmap(Assets.getBitmapData("img/logIcon.png"));
 		logIcon.width = logWidth;
-		sprite = new Sprite();
-		sprite.addChild(logIcon);
-		sprite.x = -logIcon.width / 2; 
-		sprite.y = -logIcon.height / 2;
-		this.addChild(sprite);
+		logSprite = new Sprite();
+		logSprite.addChild(logIcon);
+		logSprite.x = -logIcon.width / 2; 
+		logSprite.y = -logIcon.height / 2;
+		this.addChild(logSprite);
 		
 		//put sprite on screen
-		this.x = x;
-		this.y = y;
+		//logSprite.x = x;
+		//logSprite.y = y;
+		
+		//add sprite to weight
+		var weightIcon = new Bitmap(Assets.getBitmapData("img/weightIcon.png"));
+		weightSprite = new Sprite();
+		weightSprite.addChild(weightIcon);
+		weightSprite.x = -weightIcon.width / 2; 
+		weightSprite.y = -weightIcon.height / 2;
+		this.addChild(weightSprite);
+		
+		//put sprite on screen
+		//weightSprite.x = x;
+		//weightSprite.y = y;
 	}
 	
 	public function increaseTheVelocityOfOurProjectileSoThatItMayInduceTheMaximumAmountOfDamageOnOurOpponents()
@@ -140,9 +154,22 @@ class Launcher extends Sprite
 	
 	public function act() 
 	{
-		this.x = log.getPosition().x / Main.PHYSICS_SCALE;
-		this.y = log.getPosition().y / Main.PHYSICS_SCALE;
-		this.rotation = log.getAngle() * 180.0 / Math.PI;
+		logSprite.x = (log.getPosition().x-0) / Main.PHYSICS_SCALE;
+		logSprite.x -= 90;
+		logSprite.y = (log.getPosition().y-0) / Main.PHYSICS_SCALE;
+		logSprite.y -= 10; 
+		logSprite.rotation = log.getAngle() * 180.0 / Math.PI;
+		
+		weightSprite.x = (wieght.getPosition().x - 0) / Main.PHYSICS_SCALE;
+		weightSprite.y = (wieght.getPosition().y - 0) / Main.PHYSICS_SCALE;
+		weightSprite.rotation = wieght.getAngle() * 180.0 / Math.PI;
+		
+		//for (r in ropeLinks)
+		//{
+			//r.x = log.getPosition().x / Main.PHYSICS_SCALE;
+			//r.y = log.getPosition().y / Main.PHYSICS_SCALE;
+			//r.rotation = log.getAngle() * 180.0 / Math.PI;
+		//}
 	}
 	
 	
