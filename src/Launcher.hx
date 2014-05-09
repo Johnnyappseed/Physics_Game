@@ -88,7 +88,7 @@ class Launcher extends Sprite
 		//add ammo and link to rope
 		ammo = new Projectile(x - Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) + (ammoLinkCount * 10) + 10, y + Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2));
 		Main.game.gameCanvas.ammoBelt.push(ammo);
-		trace(Main.game.gameCanvas.ammoBelt);
+		//trace(Main.game.gameCanvas.ammoBelt);
 		Main.game.gameCanvas.addChild(ammo);
 		body = ammo.circle;
 		projectileJointDef = Main.game.revoluteJointFunction(link, body, new B2Vec2((x - Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2) + (ammoLinkCount * 10) + 10) * Main.PHYSICS_SCALE, (y + Math.sqrt(((logWidth * (2 / 3)) * (logWidth * (2 / 3))) / 2)) * Main.PHYSICS_SCALE));
